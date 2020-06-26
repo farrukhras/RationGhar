@@ -9,6 +9,6 @@ RationGhar is a platform which aims to link local NGO's and community service or
  git pull --all
  git status (to check if on master)
  git add .
- git commit -m "(write the commit message here)"
+ git commit -m "write the commit message here"
  git push
 ```
