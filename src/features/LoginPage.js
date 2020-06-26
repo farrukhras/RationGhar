@@ -2,15 +2,14 @@ import React from 'react'
 import {Formik, Form, Field} from 'formik'
 import * as Yup from 'yup'
 import { makeStyles } from '@material-ui/core/styles'
-import { Button, Container } from '@material-ui/core'
-import ToggleButtonGroup from '@material-ui/lab/ToggleButtonGroup'
+import { Button, Container, Grid } from '@material-ui/core'
 import NavigateNextIcon from '@material-ui/icons/NavigateNext'
-import ToggleButton from '@material-ui/lab/ToggleButton'
 import { TextField } from 'formik-material-ui'
-import { connect } from 'react-redux'
+// import { connect } from 'react-redux'
 // import { login, clearError } from './userSlice'
 // import ErrorSnackbar from '../../ui/ErrorSnackbar'
 import landingBG from './landingBG.jpg'
+import { Link } from 'react-router-dom'
 
 const useStyles = makeStyles(theme=>({
 	root: {
@@ -24,38 +23,20 @@ const useStyles = makeStyles(theme=>({
 	},
 	input: {
     color: 'black',
-	}
-  }))
-  
+  },
+  displayIcons: {
+    display: "inline-block",
+    width: "100%",
+    float: "left",
+  },
+}))
+
 export default function LoginPage() {
 	const classes = useStyles()
 	return (
     <Container component="main" className={classes.root}>
       <img style={{position: 'absolute', left: '30vw', width: '70vw', height: '100vh'}}
       src={landingBG} alt="RationGhar"/>
-      {/* <img style={{
-        position: 'absolute',
-        left: '3vw',
-        width: '12vw',
-        height: '10vh',
-        paddingTop: 800,
-        paddingLeft: 20,
-        paddingRight:10,
-      }}
-      src={lumslogo} alt="lumslogo"/> */}
-      
-
-      {/* <img style={{
-        position: 'absolute',
-        left: '3vw',
-        width: '25vw',
-        height: '20vh',
-        paddingTop: 50,
-        // paddingLeft: -10,
-        // paddingRight:-10,
-        borderColor: "#F5FFFA",
-      }}
-      src={cmsLogo} alt="cmsLogo"/> */}
       
       <div style={{marginTop: '30vh', marginLeft: '3vw'}}>
       <Formik
@@ -81,8 +62,7 @@ export default function LoginPage() {
         >
           {({submitForm, isSubmitting})=>(
             <Form>
-              <h1 style={{color: "black"}}>Login</h1>
-
+              <h1 style={{color: "black"}}>NGO Login</h1>
               <Field
                 style = {{backgroundColor: 'white'}}
                 component={TextField}
@@ -109,15 +89,29 @@ export default function LoginPage() {
                   className: classes.input,
                 }}
               > 
-              </Field>
-              
+              </Field>     
               <br/>    
               <br/>
-              <Button size="large" onClick={submitForm} type="submit"
-              variant="contained" color="secondary" spacing= '10'
-              endIcon={<NavigateNextIcon/>}>
-                Login
-              </Button>
+              <div className={classes.displayIcons} style={{maxWidth: "16.5vw"}}>
+                <div style={{float: "left"}}>
+                  <Link to='/signup'>
+                    <p>Sign Up</p>
+                  </Link>
+                </div>
+                <div style={{float: "right"}}>
+                  <Button 
+                    size="medium" 
+                    onClick={submitForm} 
+                    type="submit"
+                    variant="contained" 
+                    color="secondary" 
+                    spacing= '10'
+                    endIcon={<NavigateNextIcon/>}
+                  >
+                    Login
+                  </Button>
+                </div>
+              </div>
             </Form>
           )}
         </Formik>

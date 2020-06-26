@@ -62,7 +62,17 @@ export default function HomePage() {
 
   return (
     <Container component="main" className={classes.root}>
-      <div className={classes.displayIcons}>
+      <div>
+        <Link to='/submission-view'>
+          <Button variant="contained" color="default" style={{float: "right", marginTop: "3vh"}}>
+            Submission View 
+          </Button>
+        </Link>
+        <Link to='/ngo-dashboard'>
+          <Button variant="contained" color="default" style={{float: "right", marginTop: "3vh"}}>
+            NGO DashBoard
+          </Button>
+        </Link>
         <Link to='/login'>
           <Button variant="contained" color="default" style={{float: "right", marginTop: "3vh"}}>
             NGO Login
