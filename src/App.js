@@ -3,6 +3,7 @@ import {BrowserRouter as Router, Switch, Route} from 'react-router-dom'
 import 'typeface-montserrat'
 import { createMuiTheme, ThemeProvider } from '@material-ui/core'
 import HomePage from './features/HomePage'
+import ActiveRequestsList from './features/ActiveRequestsList'
 
 function App() {
 
@@ -34,6 +35,7 @@ function App() {
         <div>
           <Switch>
             <Route path="/" exact component={HomePage}/>
+            <Route path="/active-requests" component={ActiveRequestsList}/>
           </Switch>
         </div>
       </ThemeProvider>

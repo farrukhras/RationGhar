@@ -48,11 +48,10 @@ export default function HomePage() {
               backgroundPosition:'50%',
             }}
             > 
-            <Box color="secondary.main" style={{ fontSize: 34 }} clone>
-              {icon}
-            </Box>
-            
-            <Typography variant='h5' className={classes.settingsBoxText}>
+              <Box color="secondary.main" style={{ fontSize: 34 }} clone>
+                {icon}
+              </Box>
+              <Typography variant='h5' className={classes.settingsBoxText}>
               {text}
             </Typography>
             </Card>
@@ -95,10 +94,9 @@ export default function HomePage() {
         />
 
         <SettingsLinkBox 
-          text="Active Requestss" 
-          link="/" // link to the active requests
+          text="Active Requests" 
+          link="/active-requests" // link to the active requests
           bgImage={`linear-gradient(to bottom, #008A6470, #22C197),url(${image})`}
-
           icon={<FormatListBulletedIcon />}
         />
       </Grid>
