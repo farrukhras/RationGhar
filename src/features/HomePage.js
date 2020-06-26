@@ -96,7 +96,7 @@ export default function HomePage() {
         />
 
         <SettingsLinkBox 
-          text="Active Requests" 
+          text="View Active Requests" 
           link="/active-requests" // link to the active requests
           bgImage={`linear-gradient(to bottom, #008A6470, #22C197),url(${image})`}
           icon={<FormatListBulletedIcon />}
