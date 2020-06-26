@@ -36,26 +36,26 @@ export default function HomePage() {
   function SettingsLinkBox({text, bgImage, link, icon}){ // same function as one used in CMS by Hamza
     return(
       <Grid item>
-          <Link to={link} style={{ textDecoration: 'none' }}>
-            <Card style={{
-              width: 150,
-              height: 100,
-              border: 30,
-              padding: 40,
-              margin: 20,
-              borderRadius: '10%',
-              backgroundImage:bgImage,
-              backgroundPosition:'50%',
-            }}
-            > 
-              <Box color="secondary.main" style={{ fontSize: 34 }} clone>
-                {icon}
-              </Box>
-              <Typography variant='h5' className={classes.settingsBoxText}>
+        <Link to={link} style={{ textDecoration: 'none' }}>
+          <Card style={{
+            width: 150,
+            height: 100,
+            border: 30,
+            padding: 40,
+            margin: 20,
+            borderRadius: '10%',
+            backgroundImage:bgImage,
+            backgroundPosition:'50%',
+          }}
+          > 
+            <Box color="secondary.main" style={{ fontSize: 34 }} clone>
+              {icon}
+            </Box>
+            <Typography variant='h5' className={classes.settingsBoxText}>
               {text}
             </Typography>
-            </Card>
-          </Link>
+          </Card>
+        </Link>
       </Grid>
     )    
   }
@@ -63,9 +63,11 @@ export default function HomePage() {
   return (
     <Container component="main" className={classes.root}>
       <div className={classes.displayIcons}>
-        <Button variant="contained" color="default" style={{float: "right", marginTop: "3vh"}}>
-          NGO Login
-        </Button>
+        <Link to='/login'>
+          <Button variant="contained" color="default" style={{float: "right", marginTop: "3vh"}}>
+            NGO Login
+          </Button>
+        </Link>
       </div>
       <div>
         <h1 className={classes.details}>RationGhar</h1>
@@ -89,7 +91,7 @@ export default function HomePage() {
         <SettingsLinkBox 
           text="Ration Registration Form" 
           bgImage={`linear-gradient(to bottom,  #FFA40080, #FFC65F), url(${image})`}
-          link="/" // link to the form that Hamza will make
+          link="/registration-form" // link to the form that Hamza will make
           icon={<TextFieldsIcon />}
         />
 
