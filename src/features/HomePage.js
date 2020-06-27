@@ -5,13 +5,16 @@ import { Grid, Box, Typography, Card, Button } from '@material-ui/core'
 import TextFieldsIcon from '@material-ui/icons/TextFields'
 import FormatListBulletedIcon from '@material-ui/icons/FormatListBulleted'
 import { Link } from 'react-router-dom'
+import Fab from '@material-ui/core/Fab'
+import logo from './Logo.png'
 
 const useStyles = makeStyles(theme=>({
   root: {
     position: 'absolute',
     maxWidth: '100vw',
     height: '100%',
-    backgroundColor: "#3578fa",
+    // backgroundColor: "#3578fa",
+    backgroundImage: 'linear-gradient(to bottom, #e0c2c2 , #75a7a8)',
     color: theme.palette.secondary.main
   },
   details: {
@@ -38,10 +41,10 @@ export default function HomePage() {
       <Grid item>
         <Link to={link} style={{ textDecoration: 'none' }}>
           <Card style={{
-            width: 150,
-            height: 100,
+            width: 200,
+            height: 200,
             border: 30,
-            padding: 40,
+            padding: 60,
             margin: 20,
             borderRadius: '10%',
             backgroundImage:bgImage,
@@ -63,27 +66,26 @@ export default function HomePage() {
   return (
     <Container component="main" className={classes.root}>
       <div>
-        <Link to='/submission-view'>
-          <Button variant="contained" color="default" style={{float: "right", marginTop: "3vh"}}>
-            Submission View 
-          </Button>
-        </Link>
-        <Link to='/ngo-dashboard'>
-          <Button variant="contained" color="default" style={{float: "right", marginTop: "3vh"}}>
-            NGO DashBoard
-          </Button>
-        </Link>
         <Link to='/login'>
-          <Button variant="contained" color="default" style={{float: "right", marginTop: "3vh"}}>
+          <Fab variant="contained" color="default" style={{float: "right", marginTop: "3vh"}}>
             NGO Login
-          </Button>
+          </Fab>
         </Link>
       </div>
       <div>
-        <h1 className={classes.details}>RationGhar</h1>
+        {/* <h1 className={classes.details}>RationGhar</h1> */}
+        <img style={{position: 'absolute', left: '45vw', width: '10vw', height: '20vh'}}
+        src={logo} alt="RationGharlogo"/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        
         <div>
           <div style={{float: "left", textAlign: "left", width:"33.33333%"}}>
-            <h2 style={{marginLeft: "15vh"}}>100+</h2> {/** replace this number with the total rations served once backend linked*/}
+            <h1 style={{marginLeft: "15vh"}}>100+</h1> {/** replace this number with the total rations served once backend linked*/}
             <h4 style={{marginLeft: "9vh"}}>Rations Delivered</h4>
           </div>
           <div style={{float: "left", textAlign: "center",  width:"33.33333%", marginTop: "2vh"}}>
@@ -93,7 +95,7 @@ export default function HomePage() {
             </div>
           <div style={{float: "right", textAlign: "right",  width:"33.33333%"}}>
             <h2 style={{marginRight: "15vh"}}>15+</h2> {/** replace this number with the total ngos served once backend linked*/}
-            <h4 style={{marginRight: "7vh"}}>Partnered NGO's</h4>
+            <h4 style={{paddingLeft: 50}}>Partnered NGO's</h4>
           </div>
         </div>
       </div>

@@ -7,6 +7,7 @@ import {Container, LinearProgress,Typography} from '@material-ui/core'
 import { TextField } from 'formik-material-ui'
 import { useHistory } from 'react-router-dom'
 // import { connect } from 'react-redux'
+import Fab from '@material-ui/core/Fab'
 
 // PLACE THE SUBMIT BUTTON AT THE BOTTOM OF THE PAGE (to the bottom right)
 // ALSO ADD VALIDATION TO THE FIELDS
@@ -38,7 +39,8 @@ export default function RegistrationForm() {
   let history = useHistory()
 
   return (
-    <Container component="main" maxWidth="xs"> 
+    <div style={{backgroundImage: 'linear-gradient(to right, #e0c2c2 , blue)'}}>
+    <Container component="main" maxWidth="xs" style={{backgroundColor: 'white', borderStyle: 'solid', borderColor: '#baa5a5', marginTop: 50}}> 
       <Typography variant="h4" className={classes.rationGharTitle}>
         Ration Registration Form
       </Typography>
@@ -170,10 +172,10 @@ export default function RegistrationForm() {
               {isSubmitting && <LinearProgress />}
               <div className={classes.displayIcons}>
                 <div style={{float: "left"}}>
-                  <Button variant="contained" onClick={() => history.goBack()}>Back</Button>
+                  <Fab variant="contained" onClick={() => history.goBack()}>Back</Fab>
                 </div>
                 <div style={{float: "right"}}>
-                  <Button type="submit" variant="contained" color="primary" onClick={onSubmit} >Submit Form</Button>
+                  <Fab type="submit" variant="contained" color="primary" onClick={onSubmit} >Submit Form</Fab>
                 </div>
               </div>
             </Form>
@@ -181,5 +183,6 @@ export default function RegistrationForm() {
         }}
       </Formik>
     </Container>
+    </div>
     )
 }
