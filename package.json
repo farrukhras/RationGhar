@@ -21,12 +21,7 @@
     "react-redux": "^7.2.0",
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.1",
-<<<<<<< HEAD
     "recompose": "^0.30.0",
-=======
-    "react-simple-chatbot": "^0.6.1",
-    "styled-components": "^5.1.1",
->>>>>>> e6828c62661bd259c1c6aed4038437a8922bca2d
     "typeface-montserrat": "0.0.75",
     "yup": "^0.29.1"
   },
