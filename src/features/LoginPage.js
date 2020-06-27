@@ -10,6 +10,7 @@ import { TextField } from 'formik-material-ui'
 // import ErrorSnackbar from '../../ui/ErrorSnackbar'
 import landingBG from './landingBG.jpg'
 import { Link } from 'react-router-dom'
+import Fab from '@material-ui/core/Fab'
 
 const useStyles = makeStyles(theme=>({
 	root: {
@@ -18,7 +19,8 @@ const useStyles = makeStyles(theme=>({
     marginLeft: 0,
     marginTop: 0,
     height: '100%',
-    backgroundColor: "#DBDBDA40",
+    // backgroundColor: "#DBDBDA40",
+    backgroundImage: 'linear-gradient(to bottom, white , blue)',
     color: theme.palette.secondary.main
 	},
 	input: {
@@ -28,6 +30,9 @@ const useStyles = makeStyles(theme=>({
     display: "inline-block",
     width: "100%",
     float: "left",
+  },
+  extendedIcon: {
+    marginRight: theme.spacing(1),
   },
 }))
 
@@ -95,21 +100,34 @@ export default function LoginPage() {
               <div className={classes.displayIcons} style={{maxWidth: "16.5vw"}}>
                 <div style={{float: "left"}}>
                   <Link to='/signup'>
-                    <p>Sign Up</p>
-                  </Link>
-                </div>
-                <div style={{float: "right"}}>
-                  <Button 
-                    size="medium" 
-                    onClick={submitForm} 
-                    type="submit"
+                    <Fab
+                    size="large" 
+                    // onClick={submitForm} 
+                    // type="submit"
                     variant="contained" 
                     color="secondary" 
                     spacing= '10'
-                    endIcon={<NavigateNextIcon/>}
+                    // endIcon={<NavigateNextIcon/>}
+                    className={classes.extendedIcon}
+                    >
+                      signup
+                    </Fab>
+                    
+                  </Link>
+                </div>
+                <div style={{float: "right"}}>
+                  <Fab 
+                    size="large" 
+                    onClick={submitForm} 
+                    // type="submit"
+                    variant="extended" 
+                    color="secondary" 
+                    spacing= '20'
+                    // endIcon={<NavigateNextIcon/>}
+                    className={classes.extendedIcon}
                   >
                     Login
-                  </Button>
+                  </Fab>
                 </div>
               </div>
             </Form>

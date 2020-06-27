@@ -21,7 +21,7 @@ export default function ActiveRequestsList() {
     selectableRows:false,
 		rowsPerPage: 7,
 		print: false
-  }
+}
 
 	return (
 		<div>
