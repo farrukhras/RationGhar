@@ -1,15 +1,15 @@
-import React from 'react'
+import React, { useState } from 'react'
 import {Formik, Form, Field} from 'formik'
 import * as Yup from 'yup'
 import { makeStyles } from '@material-ui/core/styles'
 import { Button, Container, Grid } from '@material-ui/core'
 import NavigateNextIcon from '@material-ui/icons/NavigateNext'
 import { TextField } from 'formik-material-ui'
-// import { connect } from 'react-redux'
-// import { login, clearError } from './userSlice'
-// import ErrorSnackbar from '../../ui/ErrorSnackbar'
 import landingBG from './landingBG.jpg'
-import { Link } from 'react-router-dom'
+import { Link, withRouter } from 'react-router-dom'
+import { compose } from 'recompose'
+import { withFirebase } from './Firebase'
+import ErrorSnackbar from '../ui/ErrorSnackbar'
 import Fab from '@material-ui/core/Fab'
 
 const useStyles = makeStyles(theme=>({
@@ -36,8 +36,10 @@ const useStyles = makeStyles(theme=>({
   },
 }))
 
-export default function LoginPage() {
-	const classes = useStyles()
+function LoginForm(props) {
+  const [error, setError] = useState(null)
+  const classes = useStyles()
+  
 	return (
     <Container component="main" className={classes.root}>
       <img style={{position: 'absolute', left: '30vw', width: '70vw', height: '100vh'}}
@@ -57,13 +59,21 @@ export default function LoginPage() {
             password: Yup.string()
               .required('Required')
         })}
-        onSubmit={ (values, { setSubmitting }) => {
-            // dispatch(login({email: values.email, password: values.password, userType: userType}))
-            // .then(() => {
-            //   setSubmitting(false)
-            // }) 
-          }
-        }
+        onSubmit={(values, { setSubmitting }) => {
+          const email = values.email
+          const password = values.password
+          
+          props.firebase
+            .doSignInWithEmailAndPassword(email, password)
+            .then(() => {
+              props.history.push('/ngo-dashboard')
+            })
+            .catch(error => {
+              values.email = ''
+              values.password = ''
+              setError(error)
+            })
+        }}
         >
           {({submitForm, isSubmitting})=>(
             <Form>
@@ -110,7 +120,7 @@ export default function LoginPage() {
                     // endIcon={<NavigateNextIcon/>}
                     className={classes.extendedIcon}
                     >
-                      signup
+                      Sign Up
                     </Fab>
                     
                   </Link>
@@ -133,10 +143,15 @@ export default function LoginPage() {
             </Form>
           )}
         </Formik>
-        
+        {error && <ErrorSnackbar stateError={error.message}/>}
         </div>
-          
-      {/* <ErrorSnackbar stateError={error} clearError={clearError}/> */}
     </Container>
   )
 }
+
+const LoginPage = compose (
+  withRouter,
+  withFirebase,
+)(LoginForm)
+
+export default LoginPage

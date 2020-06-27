@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import {Formik, Form, Field} from 'formik'
 import * as Yup from 'yup'
 import { makeStyles } from '@material-ui/core/styles'
-import {Container,Typography} from '@material-ui/core'
+import {Container,Typography, Button} from '@material-ui/core'
 import { TextField } from 'formik-material-ui'
 import { useHistory, withRouter } from "react-router-dom"
 import { compose } from 'recompose'
@@ -48,8 +48,8 @@ function SignUpForm(props) {
           initialValues = {{
             name: '',
             email:'',
-            cnic: '',
-            phoneNumber: '',
+            cnic: -1,
+            phoneNumber: -1,
             location:'',
             password:'',
             confirmPassword:'',
@@ -59,9 +59,9 @@ function SignUpForm(props) {
               .required('Required'),
             email: Yup.string()
               .required('Required'),
-            cnic: Yup.string()
+            cnic: Yup.number()
               .required('Required'),
-            phoneNumber: Yup.string()
+            phoneNumber: Yup.number()
               .required('Required'),
             location: Yup.string()
               .required('Required'),
@@ -70,13 +70,13 @@ function SignUpForm(props) {
               .min(8,'Must be at least 8 characters')
               .max(30,'Must be at most 30 characters')
               .matches('^[a-zA-Z0-9]+$', 'All passwords must be alphanumeric (no special symbols).'),
-            confirmPassword: Yup.string()
-            .when("password",{
-              is: val => (val && val.length > 0 ? true : false),
-              then: Yup.string().oneOf(
-                [Yup.ref("newPassword")],"Both passwords need to be the same."
-              )
-            })
+            // confirmPassword: Yup.string()
+            // .when("password",{
+            //   is: val => (val && val.length > 0 ? true : false),
+            //   then: Yup.string().oneOf(
+            //     [Yup.ref("newPassword")],"Both passwords need to be the same."
+            //   )
+            // })
           })}
           onSubmit={(values, { setSubmitting }) => {
             const name = values.name
@@ -95,7 +95,7 @@ function SignUpForm(props) {
               })
           }}
         >
-          {({onSubmit, isSubmitting})=>{
+          {({submitForm, isSubmitting})=>{
             return(
               <Form style={{paddingBottom: "15%"}}>
                 <div style={{textAlign:"center"}}>
@@ -128,7 +128,7 @@ function SignUpForm(props) {
                     required
                     fullWidth
                     label="CNIC"
-                    name="cnic"
+                    name="CNIC"
                   ></Field>
                   <br/>
 
@@ -181,7 +181,7 @@ function SignUpForm(props) {
                     <Fab variant="contained" onClick={() => history.goBack()}>Back</Fab>
                   </div>
                   <div style={{float: "right"}}>
-                    <Fab type="submit" variant="contained" color="primary" onClick={onSubmit} >Sign Up</Fab>
+                    <Fab variant="contained" color="primary" onClick={submitForm}>Sign Up</Fab>
                   </div>
                 </div>
               </Form>
