@@ -1,18 +1,15 @@
-import React from 'react'
+import React, { useState } from 'react'
 import {Formik, Form, Field} from 'formik'
 import * as Yup from 'yup'
 import { makeStyles } from '@material-ui/core/styles'
-import Button from '@material-ui/core/Button'
-import {Container, LinearProgress,Typography} from '@material-ui/core'
+import {Container,Typography} from '@material-ui/core'
 import { TextField } from 'formik-material-ui'
-import { useHistory } from "react-router-dom"
-import ChatBot from 'react-simple-chatbot';
-import styled from 'styled-components'
+import { useHistory, withRouter } from "react-router-dom"
+import { compose } from 'recompose'
+import { withFirebase } from './Firebase'
+// import ChatBot from 'react-simple-chatbot';
 import Fab from '@material-ui/core/Fab'
-
-// import { connect } from 'react-redux'
-
-// Add 2 more fields (facebook and instagram links ke liye)
+import landingBG from './landingBG.jpg'
 
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -32,7 +29,9 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 
-export default function SignUpPage() {
+function SignUpForm(props) {
+  const [error, setError] = useState(null)
+
   const classes = useStyles()
   let history = useHistory()
 
@@ -60,20 +59,16 @@ export default function SignUpPage() {
               .required('Required'),
             email: Yup.string()
               .required('Required'),
-          
             cnic: Yup.string()
               .required('Required'),
-
             phoneNumber: Yup.string()
               .required('Required'),
-              
             location: Yup.string()
-              .required('Required')
-              ,
+              .required('Required'),
             password: Yup.string()
               .required('Required')
               .min(8,'Must be at least 8 characters')
-              .max(30,'Must be atmost 30 characters')
+              .max(30,'Must be at most 30 characters')
               .matches('^[a-zA-Z0-9]+$', 'All passwords must be alphanumeric (no special symbols).'),
             confirmPassword: Yup.string()
             .when("password",{
@@ -84,11 +79,20 @@ export default function SignUpPage() {
             })
           })}
           onSubmit={(values, { setSubmitting }) => {
-            // dispatch(changePassword({ name: values.name, cnic: values.cnic}))
-            // .then(() => {
-            //   setSubmitting(false)
-            // })
-            console.log("Submitted")  
+            const name = values.name
+            const email = values.email
+            const password = values.password
+            
+            props.firebase
+              .doCreateUserWithEmailAndPassword(email, password)
+              .then(authUser => {
+                props.history.push('/login')
+              })
+              .catch(error => {
+                values.password = ''
+                values.confirmPassword = ''
+                setError(error)
+              })
           }}
         >
           {({onSubmit, isSubmitting})=>{
@@ -172,7 +176,6 @@ export default function SignUpPage() {
                   ></Field>
                   <br/>
                 </div>
-                {/* {isSubmitting && <LinearProgress />} */}
                 <div className={classes.displayIcons}>
                   <div style={{float: "left"}}>
                     <Fab variant="contained" onClick={() => history.goBack()}>Back</Fab>
@@ -212,3 +215,10 @@ export default function SignUpPage() {
     </div>
   )
 }
+
+const SignUpPage = compose (
+  withRouter,
+  withFirebase,
+)(SignUpForm)
+
+export default SignUpPage

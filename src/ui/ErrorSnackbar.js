@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import {IconButton, Snackbar} from '@material-ui/core'
 import CloseIcon from '@material-ui/icons/Close'
-// import { useDispatch } from 'react-redux'
 
 export default function ErrorSnackbar({stateError}) {
   const [close, setClose] = useState(false)
