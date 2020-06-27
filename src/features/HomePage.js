@@ -82,8 +82,6 @@ export default function HomePage() {
         <br/>
         <br/>
         <br/>
-        <br/>
-        <br/>
         
         <div>
           <div style={{float: "left", textAlign: "left", width:"33.33333%"}}>
