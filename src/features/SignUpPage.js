@@ -1,14 +1,14 @@
-import React from 'react'
+import React, { useState } from 'react'
 import {Formik, Form, Field} from 'formik'
 import * as Yup from 'yup'
 import { makeStyles } from '@material-ui/core/styles'
 import Button from '@material-ui/core/Button'
-import {Container, LinearProgress,Typography} from '@material-ui/core'
+import {Container, Typography} from '@material-ui/core'
 import { TextField } from 'formik-material-ui'
-import { useHistory } from "react-router-dom"
-// import { connect } from 'react-redux'
-
-// Add 2 more fields (facebook and instagram links ke liye)
+import { useHistory, withRouter } from "react-router-dom"
+import { compose } from 'recompose'
+import { withFirebase } from './Firebase'
+import ErrorSnackbar from '../ui/ErrorSnackbar'
 
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -28,7 +28,9 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 
-export default function SignUpPage() {
+function SignUpForm(props) {
+  const [error, setError] = useState(null)
+
   const classes = useStyles()
   let history = useHistory()
 
@@ -42,49 +44,55 @@ export default function SignUpPage() {
         initialValues = {{
           name: '',
           email:'',
-          cnic: '',
-          phoneNumber: '',
-          location:'',
+          // cnic: '',
+          // phoneNumber: '',
+          // location:'',
           password:'',
           confirmPassword:'',
+          error: null,
         }}
         validationSchema = {Yup.object({
           name: Yup.string()
             .required('Required'),
           email: Yup.string()
             .required('Required'),
-        
-          cnic: Yup.string()
-            .required('Required'),
-
-          phoneNumber: Yup.string()
-            .required('Required'),
-            
-          location: Yup.string()
-            .required('Required')
-            ,
+          // cnic: Yup.string()
+          //   .required('Required'),
+          // phoneNumber: Yup.string()
+          //   .required('Required'),
+          // location: Yup.string()
+          //   .required('Required'),
           password: Yup.string()
             .required('Required')
             .min(8,'Must be at least 8 characters')
-            .max(30,'Must be atmost 30 characters')
+            .max(30,'Must be at most 30 characters')
             .matches('^[a-zA-Z0-9]+$', 'All passwords must be alphanumeric (no special symbols).'),
-          confirmPassword: Yup.string()
-          .when("password",{
-            is: val => (val && val.length > 0 ? true : false),
-            then: Yup.string().oneOf(
-              [Yup.ref("newPassword")],"Both passwords need to be the same."
-            )
-          })
+          // confirmPassword: Yup.string()
+          //   .when("password",{
+          //     is: val => (val && val.length > 0 ? true : false),
+          //     then: Yup.string().oneOf(
+          //       [Yup.ref("newPassword")],"Both passwords need to be the same."
+          //     )
+          //   })
         })}
         onSubmit={(values, { setSubmitting }) => {
-          // dispatch(changePassword({ name: values.name, cnic: values.cnic}))
-          // .then(() => {
-          //   setSubmitting(false)
-          // })
-          console.log("Submitted")  
+          const name = values.name
+          const email = values.email
+          const password = values.password
+          
+          props.firebase
+            .doCreateUserWithEmailAndPassword(email, password)
+            .then(authUser => {
+              props.history.push('/login')
+            })
+            .catch(error => {
+              values.password = ''
+              values.confirmPassword = ''
+              setError(error)
+            })
         }}
       >
-        {({onSubmit, isSubmitting})=>{
+        {({onSubmit})=>{
           return(
             <Form style={{paddingBottom: "15%"}}>
               <div style={{textAlign:"center"}}>
@@ -165,7 +173,7 @@ export default function SignUpPage() {
                 ></Field>
                 <br/>
               </div>
-              {/* {isSubmitting && <LinearProgress />} */}
+
               <div className={classes.displayIcons}>
                 <div style={{float: "left"}}>
                   <Button variant="contained" onClick={() => history.goBack()}>Back</Button>
@@ -174,6 +182,7 @@ export default function SignUpPage() {
                   <Button type="submit" variant="contained" color="primary" onClick={onSubmit} >Sign Up</Button>
                 </div>
               </div>
+             {error && <ErrorSnackbar stateError={error.message}/>}
             </Form>
           )
         }}
@@ -181,3 +190,10 @@ export default function SignUpPage() {
     </Container>
   )
 }
+
+const SignUpPage = compose (
+  withRouter,
+  withFirebase,
+)(SignUpForm)
+
+export default SignUpPage

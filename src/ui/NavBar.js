@@ -3,6 +3,7 @@ import {Link} from 'react-router-dom'
 import ExitToAppIcon from '@material-ui/icons/ExitToApp'
 import { makeStyles } from '@material-ui/core/styles'
 import {AppBar, Toolbar, IconButton, Avatar, Typography, Grid, Tooltip} from '@material-ui/core'
+import SignOut from '../features/SignOut'
 
 const useStyles = makeStyles((theme) => ({
 	displayIcons: {
@@ -34,13 +35,7 @@ export default function NavBar() {
 							</Grid>
             </div>
             <div style={{float: "right"}}>
-							<Link to='/'>
-								<Tooltip title="Logout" placement="bottom-start">
-									<IconButton  edge="end" style={{padding: 10}}>
-										<ExitToAppIcon />
-									</IconButton>
-								</Tooltip>
-							</Link>
+							<SignOut/>
             </div>
 					</div>
         </Toolbar>
@@ -48,4 +43,3 @@ export default function NavBar() {
     </div>
   )
 }
-
