@@ -101,7 +101,7 @@ export default function SignUpPage() {
                     variant="filled"
                     margin="normal"
                     required
-                    label="Name"
+                    label="Names"
                     name="name"
                     fullWidth
                   ></Field>
