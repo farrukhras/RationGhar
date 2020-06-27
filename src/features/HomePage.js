@@ -66,16 +66,6 @@ export default function HomePage() {
   return (
     <Container component="main" className={classes.root}>
       <div>
-        <Link to='/submission-view'>
-          <Fab variant="contained" color="default" style={{float: "right", marginTop: "3vh"}}>
-            Submission View 
-          </Fab>
-        </Link>
-        <Link to='/ngo-dashboard'>
-          <Fab variant="contained" color="default" style={{float: "right", marginTop: "3vh"}}>
-            NGO DashBoard
-          </Fab>
-        </Link>
         <Link to='/login'>
           <Fab variant="contained" color="default" style={{float: "right", marginTop: "3vh"}}>
             NGO Login
