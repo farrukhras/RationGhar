@@ -36,7 +36,7 @@ function SignUpForm(props) {
   let history = useHistory()
 
   return (
-    <div style={{backgroundImage: 'linear-gradient(to right, #e0c2c2 , blue)'}}>
+    <div style={{backgroundImage: 'linear-gradient(to right, #6F2232 , #950740)'}}>
         
       <Container component="main" maxWidth="xs" style={{backgroundColor: 'white', borderStyle: 'solid', borderColor: '#baa5a5', marginTop: 50}}> 
       <Typography variant="h4" className={classes.rationGharTitle}>
@@ -178,10 +178,10 @@ function SignUpForm(props) {
                 </div>
                 <div className={classes.displayIcons}>
                   <div style={{float: "left"}}>
-                    <Fab variant="contained" onClick={() => history.goBack()}>Back</Fab>
+                    <Fab style={{backgroundColor: "#C3073F90"}} color="primary" variant="contained" onClick={() => history.goBack()}><h3>Back</h3></Fab>
                   </div>
                   <div style={{float: "right"}}>
-                    <Fab variant="contained" color="primary" onClick={submitForm}>Sign Up</Fab>
+                    <Fab style={{backgroundColor: "#C3073F90"}} variant="contained" color="primary" onClick={submitForm}><h3>Sign Up</h3></Fab>
                   </div>
                 </div>
               </Form>

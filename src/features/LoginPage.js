@@ -5,12 +5,13 @@ import { makeStyles } from '@material-ui/core/styles'
 import { Button, Container, Grid } from '@material-ui/core'
 import NavigateNextIcon from '@material-ui/icons/NavigateNext'
 import { TextField } from 'formik-material-ui'
-import landingBG from './landingBG.jpg'
+import loginbg from './loginbg.jpg'
 import { Link, withRouter } from 'react-router-dom'
 import { compose } from 'recompose'
 import { withFirebase } from './Firebase'
 import ErrorSnackbar from '../ui/ErrorSnackbar'
 import Fab from '@material-ui/core/Fab'
+import { sizing } from '@material-ui/system'
 
 const useStyles = makeStyles(theme=>({
 	root: {
@@ -19,8 +20,9 @@ const useStyles = makeStyles(theme=>({
     marginLeft: 0,
     marginTop: 0,
     height: '100%',
-    // backgroundColor: "#DBDBDA40",
-    backgroundImage: 'linear-gradient(to bottom, white , blue)',
+    backgroundColor: "#DBDBDA",
+    // backgroundImage: 'linear-gradient(to bottom, #EAB474, #952727)',
+    
     color: theme.palette.secondary.main
 	},
 	input: {
@@ -43,7 +45,7 @@ function LoginForm(props) {
 	return (
     <Container component="main" className={classes.root}>
       <img style={{position: 'absolute', left: '30vw', width: '70vw', height: '100vh'}}
-      src={landingBG} alt="RationGhar"/>
+      src={loginbg} alt="RationGhar"/>
       
       <div style={{marginTop: '30vh', marginLeft: '3vw'}}>
       <Formik
@@ -77,11 +79,11 @@ function LoginForm(props) {
         >
           {({submitForm, isSubmitting})=>(
             <Form>
-              <h1 style={{color: "black"}}>NGO Login</h1>
+              <h1 style={{color: "#272323", fontSize: "300%"}}>NGO Login</h1>
               <Field
                 style = {{backgroundColor: 'white'}}
                 component={TextField}
-                variant="filled"
+                variant="outlined"
                 margin="normal"
                 required
                 label="Email"
@@ -94,7 +96,7 @@ function LoginForm(props) {
               <Field
                 style = {{backgroundColor: 'white'}}
                 component={TextField}
-                variant="filled"
+                variant="outlined"
                 margin="normal"
                 required
                 label="Password"
@@ -111,6 +113,7 @@ function LoginForm(props) {
                 <div style={{float: "left"}}>
                   <Link to='/signup'>
                     <Fab
+                    style={{backgroundColor: "#C3073F90"}}
                     size="large" 
                     // onClick={submitForm} 
                     // type="submit"
@@ -120,13 +123,14 @@ function LoginForm(props) {
                     // endIcon={<NavigateNextIcon/>}
                     className={classes.extendedIcon}
                     >
-                      Sign Up
+                      <h3>Sign Up</h3>
                     </Fab>
                     
                   </Link>
                 </div>
                 <div style={{float: "right"}}>
                   <Fab 
+                    style={{backgroundColor: "#C3073F90"}}
                     size="large" 
                     onClick={submitForm} 
                     // type="submit"
@@ -136,7 +140,7 @@ function LoginForm(props) {
                     // endIcon={<NavigateNextIcon/>}
                     className={classes.extendedIcon}
                   >
-                    Login
+                    <h3>Login</h3>
                   </Fab>
                 </div>
               </div>
