@@ -14,20 +14,20 @@ const config = {
 
 class Firebase {
   constructor() {
-		app.initializeApp(config);
+		app.initializeApp(config)
 		
-		this.auth = app.auth();
+		this.auth = app.auth()
 	}
 	
 	// *** Auth API ***
 
   doCreateUserWithEmailAndPassword = (email, password) =>
-		this.auth.createUserWithEmailAndPassword(email, password);
+		this.auth.createUserWithEmailAndPassword(email, password)
 		
 	doSignInWithEmailAndPassword = (email, password) =>
-		this.auth.signInWithEmailAndPassword(email, password);
+		this.auth.signInWithEmailAndPassword(email, password)
 
-	doSignOut = () => this.auth.signOut();
+	doSignOut = () => this.auth.signOut()
 }
 
-export default Firebase;
+export default Firebase
