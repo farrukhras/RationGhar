@@ -6,20 +6,24 @@ import TextFieldsIcon from '@material-ui/icons/TextFields'
 import FormatListBulletedIcon from '@material-ui/icons/FormatListBulleted'
 import { Link } from 'react-router-dom'
 import Fab from '@material-ui/core/Fab'
-import logo from './Logo.png'
+// import logo from './Logo.png'
+import homebg from './home.jpg'
 
 const useStyles = makeStyles(theme=>({
   root: {
     position: 'absolute',
     maxWidth: '100vw',
     height: '100%',
-    // backgroundColor: "#3578fa",
-    backgroundImage: 'linear-gradient(to bottom, #e0c2c2 , #75a7a8)',
+    // backgroundColor: "#1A1A1D",
+    // backgroundImage: 'linear-gradient(to bottom, #e0c2c2 , #75a7a8)',
     color: theme.palette.secondary.main
   },
   details: {
     textAlign: "center",
-    marginTop: "5%"
+    marginTop: "5%",
+    fontSize: "500%",
+    textShadow: '3px 3px #ff0000',
+    fontWeight: 'bold',
   },
   displayIcons: {
     display: "inline-block",
@@ -64,45 +68,43 @@ export default function HomePage() {
   }
 
   return (
+    <div>
+      <img style={{width: '100vw', height: '100vh', float: 'left'}}
+      src={homebg} alt="RationGhar"/>
+      
     <Container component="main" className={classes.root}>
       <div>
         <Link to='/login'>
-          <Fab variant="contained" color="default" style={{float: "right", marginTop: "3vh"}}>
-            NGO Login
+          <Fab variant="extended" size='large' color="primary" style={{float: "right", marginTop: "3vh", backgroundColor: "#C3073F"}}>
+            <h3>NGO Login</h3>
           </Fab>
         </Link>
       </div>
       <div>
-        {/* <h1 className={classes.details}>RationGhar</h1> */}
-        <img style={{position: 'absolute', left: '45vw', width: '10vw', height: '20vh'}}
-        src={logo} alt="RationGharlogo"/>
-        <br/>
-        <br/>
-        <br/>
-        <br/>
-        <br/>
-        <br/>
+        <h1 className={classes.details}>Ration Ghar</h1>
+        
+        {/* <img style={{position: 'absolute', left: '45vw', width: '10vw', height: '20vh'}}
+        src={logo} alt="RationGharlogo"/> */}
         
         <div>
           <div style={{float: "left", textAlign: "left", width:"33.33333%"}}>
-            <h1 style={{marginLeft: "15vh"}}>100+</h1> {/** replace this number with the total rations served once backend linked*/}
-            <h4 style={{marginLeft: "9vh"}}>Rations Delivered</h4>
+            <h1 style={{marginLeft: "15vh", fontSize: "300%",textShadow: '3px 3px #ff0000'}}>100+</h1> {/** replace this number with the total rations served once backend linked*/}
+            <h4 style={{marginLeft: "12vh"}}>Rations Delivered</h4>
           </div>
           <div style={{float: "left", textAlign: "center",  width:"33.33333%", marginTop: "2vh"}}>
-            <span>Here comes the basic details about RationGhar and what it is about and any other important information 
-              that may be required. Any this will be written by none other than owen very own: HAMZA FAROOQ!!! and he is a 
-              GUY for some reason.</span>
+            <span>Ration Ghar is an initiative to provide plateform to Non-Government Organizations to reach out to those 
+              who are in dire need of food and daily necessities especially during the difficult times of COVID'19</span>
             </div>
           <div style={{float: "right", textAlign: "right",  width:"33.33333%"}}>
-            <h2 style={{marginRight: "15vh"}}>15+</h2> {/** replace this number with the total ngos served once backend linked*/}
-            <h4 style={{paddingLeft: 50}}>Partnered NGO's</h4>
+            <h1 style={{marginRight: "15vh", fontSize: "300%",textShadow: '3px 3px #ff0000'}}>15+</h1> {/** replace this number with the total ngos served once backend linked*/}
+            <h4 style={{marginRight: "12vh"}}>Partnered NGO's</h4>
           </div>
         </div>
       </div>
       <Grid container direction="row" justify="center" alignItems="center">
         <SettingsLinkBox 
           text="Ration Registration Form" 
-          bgImage={`linear-gradient(to bottom,  #FFA40080, #FFC65F), url(${image})`}
+          bgImage={`linear-gradient(to bottom,  #6F223280, #C3073F), url(${image})`}
           link="/registration-form" // link to the form that Hamza will make
           icon={<TextFieldsIcon />}
         />
@@ -110,10 +112,11 @@ export default function HomePage() {
         <SettingsLinkBox 
           text="View Active Requests" 
           link="/active-requests" // link to the active requests
-          bgImage={`linear-gradient(to bottom, #008A6470, #22C197),url(${image})`}
+          bgImage={`linear-gradient(to bottom, #e5c61680, #e5c616),url(${image})`}
           icon={<FormatListBulletedIcon />}
         />
       </Grid>
     </Container>
+    </div>
   )
 }
