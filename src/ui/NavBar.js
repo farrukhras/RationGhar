@@ -1,6 +1,4 @@
-import React, { useState } from 'react'
-import {Link} from 'react-router-dom'
-import ExitToAppIcon from '@material-ui/icons/ExitToApp'
+import React from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import {AppBar, Toolbar, IconButton, Avatar, Typography, Grid, Tooltip} from '@material-ui/core'
 import SignOut from '../features/SignOut'
@@ -14,7 +12,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 
-export default function NavBar() {
+export default function NavBar({userName}) {
 	const classes = useStyles()
 	
   return (
@@ -30,7 +28,7 @@ export default function NavBar() {
 									src="https://dcassetcdn.com/design_img/10133/25833/25833_303600_10133_image.jpg"
 								/>
 								<Typography style={{fontWeight: 600, margin: 3, fontSize: 20}}>
-									NGO Name
+									{userName}
 								</Typography>
 							</Grid>
             </div>

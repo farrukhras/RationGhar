@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import NavBar from '../ui/NavBar'
 import { makeStyles } from '@material-ui/core/styles'
 import Container from '@material-ui/core/Container'
@@ -6,8 +6,7 @@ import { Grid, Box, Typography, Card } from '@material-ui/core'
 import FilterListIcon from '@material-ui/icons/FilterList';
 import ListIcon from '@material-ui/icons/List';
 import { Link } from 'react-router-dom'
-
-//NAVBAR only shows if the user is logged in (will later be moved to the App.js file and will be shown only if user is loggedIn)
+import { withFirebase } from './Firebase'
 
 const useStyles = makeStyles(theme=>({
   root: {
@@ -30,9 +29,33 @@ const useStyles = makeStyles(theme=>({
   },
 }))
 
-export default function NGODashboard() {
+function NGODashboard(props) {
+  const [userName, setUserName] = useState('')
+
 	const classes = useStyles()
   const image = 'https://images.vexels.com/media/users/3/148166/isolated/preview/488f0787445ac3d5e112561829ec5467-abstract-orange-square-background-by-vexels.png'
+
+  useEffect(() => {
+    async function enableApp() {
+      await props.firebase.users().once('value', snapshot => {
+        const usersObject = snapshot.val()
+        
+        if (usersObject === null) {
+          console.log("User Not Preset")
+        } else {
+          if (props.firebase.auth.currentUser !== null) {
+            const currUserId = props.firebase.auth.currentUser.uid
+            Object.keys(usersObject).map(key => {
+              if (currUserId === key) {
+                setUserName(usersObject[key].name)
+              }
+            })
+          }
+        }
+      })
+    }
+    enableApp()
+  }, [])
 
   function SettingsLinkBox({text, bgImage, link, icon}){ // same function as one used in CMS by Hamza
     return(
@@ -63,7 +86,7 @@ export default function NGODashboard() {
 
 	return (
 		<div style={{backgroundImage: "url('https://s3-eu-west-1.amazonaws.com/images.danb.me/trello-backgrounds/pink.jpg')", height: "100vh", backgroundSize: "100% 100%"}}>
-			<NavBar />
+			<NavBar userName={userName}/>
 			<Container component="main" className={classes.root}>
 				<div style={{textAlign: "center"}}>
 					<h1>100+</h1> {/** replace this number with the total rations served once backend linked*/}
@@ -89,3 +112,4 @@ export default function NGODashboard() {
 	)
 }
 
+export default withFirebase(NGODashboard)

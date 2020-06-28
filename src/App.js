@@ -40,9 +40,11 @@ function App(props) {
 
   // the user object to check if user is logged in or not
   props.firebase.auth.onAuthStateChanged(authUser => {
-    authUser
-      ? setAuthUser(authUser)
-      : setAuthUser(null)
+    if (authUser) {
+      setAuthUser(authUser)
+    } else {
+      setAuthUser(null)
+    }
   })
 
   return (

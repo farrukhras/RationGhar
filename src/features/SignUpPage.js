@@ -10,6 +10,7 @@ import { withFirebase } from './Firebase'
 // import ChatBot from 'react-simple-chatbot';
 import Fab from '@material-ui/core/Fab'
 import landingBG from './landingBG.jpg'
+import ErrorSnackbar from '../ui/ErrorSnackbar'
 
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -36,9 +37,8 @@ function SignUpForm(props) {
   let history = useHistory()
 
   return (
-    <div style={{backgroundImage: 'linear-gradient(to right, #6F2232 , #950740)'}}>
-        
-      <Container component="main" maxWidth="xs" style={{backgroundColor: 'white', borderStyle: 'solid', borderColor: '#baa5a5', marginTop: 50}}> 
+    <div style={{backgroundImage: 'linear-gradient(to right, #e0c2c2 , blue)'}}>
+      <Container component="main" maxWidth="xs" style={{backgroundColor: 'white', borderStyle: 'solid', borderColor: '#baa5a5'}}> 
       <Typography variant="h4" className={classes.rationGharTitle}>
           Sign Up for RationGhar
         </Typography>
@@ -48,8 +48,8 @@ function SignUpForm(props) {
           initialValues = {{
             name: '',
             email:'',
-            cnic: -1,
-            phoneNumber: -1,
+            cnic: '',
+            phoneNumber: '',
             location:'',
             password:'',
             confirmPassword:'',
@@ -59,9 +59,9 @@ function SignUpForm(props) {
               .required('Required'),
             email: Yup.string()
               .required('Required'),
-            cnic: Yup.number()
+            cnic: Yup.string()
               .required('Required'),
-            phoneNumber: Yup.number()
+            phoneNumber: Yup.string()
               .required('Required'),
             location: Yup.string()
               .required('Required'),
@@ -82,9 +82,23 @@ function SignUpForm(props) {
             const name = values.name
             const email = values.email
             const password = values.password
-            
+            const cnic = values.cnic
+            const number = values.phoneNumber
+            const location = values.location
             props.firebase
               .doCreateUserWithEmailAndPassword(email, password)
+              .then(authUser => {
+                // Create a user in the Firebase realtime database
+                return props.firebase
+                  .user(authUser.user.uid)
+                  .set({
+                    email,
+                    name,
+                    cnic,
+                    number,
+                    location,
+                  })
+              })
               .then(authUser => {
                 props.history.push('/login')
               })
@@ -105,7 +119,7 @@ function SignUpForm(props) {
                     variant="filled"
                     margin="normal"
                     required
-                    label="Names"
+                    label="Name"
                     name="name"
                     fullWidth
                   ></Field>
@@ -128,7 +142,7 @@ function SignUpForm(props) {
                     required
                     fullWidth
                     label="CNIC"
-                    name="CNIC"
+                    name="cnic"
                   ></Field>
                   <br/>
 
@@ -139,7 +153,7 @@ function SignUpForm(props) {
                     required
                     fullWidth
                     label="Phone Number"
-                    name="Phone Number"
+                    name="phoneNumber"
                   ></Field>
                   <br/>
 
@@ -210,7 +224,7 @@ function SignUpForm(props) {
           ]}
           style={{marginLeft: 500, marginBottom: 100}}
         /> */}
-      
+        {error && <ErrorSnackbar stateError={error.message}/>}
       </Container>
     </div>
   )
