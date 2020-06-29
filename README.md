@@ -1,4 +1,4 @@
-# Ration-Ghar
+# RationGhar
 
 RationGhar is a food distribution platform to connect NGO's and community service organizations with needy people in the time of Covid'19.
  
