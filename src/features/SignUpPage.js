@@ -2,15 +2,14 @@ import React, { useState } from 'react'
 import {Formik, Form, Field} from 'formik'
 import * as Yup from 'yup'
 import { makeStyles } from '@material-ui/core/styles'
-import {Container,Typography, Button} from '@material-ui/core'
+import {Container,Typography} from '@material-ui/core'
 import { TextField } from 'formik-material-ui'
 import { useHistory, withRouter } from "react-router-dom"
 import { compose } from 'recompose'
 import { withFirebase } from './Firebase'
-// import ChatBot from 'react-simple-chatbot';
 import Fab from '@material-ui/core/Fab'
-import landingBG from './landingBG.jpg'
 import ErrorSnackbar from '../ui/ErrorSnackbar'
+// import ChatBot from 'react-simple-chatbot';
 
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -32,6 +31,7 @@ const useStyles = makeStyles((theme) => ({
 
 function SignUpForm(props) {
   const [error, setError] = useState(null)
+  const [success, setSuccess] = useState(null)
 
   const classes = useStyles()
   let history = useHistory()
@@ -85,6 +85,7 @@ function SignUpForm(props) {
             const cnic = values.cnic
             const number = values.phoneNumber
             const location = values.location
+            
             props.firebase
               .doCreateUserWithEmailAndPassword(email, password)
               .then(authUser => {
@@ -99,7 +100,8 @@ function SignUpForm(props) {
                     location,
                   })
               })
-              .then(authUser => {
+              .then(() => {
+                setSuccess(!success)
                 props.history.push('/login')
               })
               .catch(error => {
@@ -224,6 +226,7 @@ function SignUpForm(props) {
           ]}
           style={{marginLeft: 500, marginBottom: 100}}
         /> */}
+        {success && <ErrorSnackbar stateError={"Account Created Successfully!"}/>}
         {error && <ErrorSnackbar stateError={error.message}/>}
       </Container>
     </div>

@@ -1,17 +1,14 @@
-import React from 'react'
+import React, { useState } from 'react'
 import {Formik, Form, Field} from 'formik'
 import * as Yup from 'yup'
 import { makeStyles } from '@material-ui/core/styles'
 import {Container, LinearProgress,Typography} from '@material-ui/core'
 import { TextField } from 'formik-material-ui'
-import { useHistory } from 'react-router-dom'
+import { useHistory, withRouter } from 'react-router-dom'
+import { compose } from 'recompose'
+import { withFirebase } from './Firebase'
 import Fab from '@material-ui/core/Fab'
-
-// PLACE THE SUBMIT BUTTON AT THE BOTTOM OF THE PAGE (to the bottom right)
-// ALSO ADD VALIDATION TO THE FIELDS
-
-// ** If possible try to add format validation for CNIC and Mobile Number (like they should be numbers and for CNIC
-// ** it should be 13 digits without any dashes or spaces)
+import ErrorSnackbar from '../ui/ErrorSnackbar'
 
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -32,7 +29,9 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
   
-export default function RegistrationForm() {
+function RegistrationPage(props) {
+  const [error, setError] = useState(null)
+
   const classes = useStyles()
   let history = useHistory()
 
@@ -51,39 +50,73 @@ export default function RegistrationForm() {
             location:'',
             salary:'',
             occupation:'',
-            familyMembersNumber:'',
+            familyMembersNumber: '',
           }}
           validationSchema = {Yup.object({
             name: Yup.string()
               .required('Required'),
             cnic: Yup.string()
-              .required('Required')
-              ,
+              .required('Required'),
             phoneNumber: Yup.string()
               .required('Required'),
-              
             location: Yup.string()
-              .required('Required')
-              ,
+              .required('Required'),
             salary: Yup.string()
-              .required('Required')
-              ,
+              .required('Required'),
             occupation: Yup.string()
-              .required('Required')
-              ,
+              .required('Required'),
             familyMembersNumber: Yup.string()
-              .required('Required')
-              ,
+              .required('Required'),
           })}
           onSubmit={(values, { setSubmitting }) => {
-            // dispatch(changePassword({ name: values.name, cnic: values.cnic}))
-            // .then(() => {
-            //   setSubmitting(false)
-            // })
-            console.log("Submitted")  
+            console.log(values)
+            console.log("here")
+
+            const name = values.name
+            const cnic = values.cnic
+            const number = values.phoneNumber
+            const location = values.location
+            const salary = values.salary
+            const occupation = values.occupation
+            const familyNumber = values.familyMembersNumber
+            const assignmentStatus = "Unassigned"
+            const complete = "In Progress" 
+            const assignedTo = ""
+            const assignedToNGOName = ""
+            const ngoNum = ""
+
+            props.firebase
+              .form(cnic)
+              .set({
+                name,
+                cnic,
+                number,
+                location,
+                salary, 
+                occupation,
+                familyNumber,
+                assignmentStatus,
+                complete,
+                assignedTo,
+                assignedToNGOName,
+                ngoNum
+              })
+              .then(() => {
+                props.history.push('/')
+              })
+              .catch(error => {
+                values.name = ''
+                values.cnic = ''
+                values.phoneNumber = ''
+                values.location = ''
+                values.salary = ''
+                values.occupation = ''
+                values.familyMembersNumber = ''
+                setError(error)
+              }) 
           }}
         >
-          {({onSubmit, isSubmitting})=>{
+          {({submitForm, isSubmitting})=>{
             return(
               <Form style={{paddingBottom: "15%"}}>
                 <div style={{textAlign:"center"}}>
@@ -118,7 +151,7 @@ export default function RegistrationForm() {
                     required
                     fullWidth
                     label="Phone Number"
-                    name="Phone Number"
+                    name="phoneNumber"
                   ></Field>
                   <br/>
 
@@ -172,7 +205,7 @@ export default function RegistrationForm() {
                     <Fab variant="contained" onClick={() => history.goBack()}>Back</Fab>
                   </div>
                   <div style={{float: "right"}}>
-                    <Fab type="submit" variant="contained" color="primary" onClick={onSubmit} >Submit Form</Fab>
+                    <Fab variant="contained" color="primary" onClick={submitForm}>Submit Form</Fab>
                   </div>
                 </div>
               </Form>
@@ -183,3 +216,10 @@ export default function RegistrationForm() {
     </div>
     )
 }
+
+const RegistrationForm = compose (
+  withRouter,
+  withFirebase,
+)(RegistrationPage)
+
+export default RegistrationForm

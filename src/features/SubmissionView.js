@@ -6,7 +6,6 @@ import Button from '@material-ui/core/Button'
 import {Container, LinearProgress,Typography, Box} from '@material-ui/core'
 import { TextField } from 'formik-material-ui'
 import { useHistory } from 'react-router-dom'
-// import { connect } from 'react-redux'
 
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -26,7 +25,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 
-export default function SubmissionView() {
+export default function SubmissionView({cnic, formData}) {
   const classes = useStyles()
   let history = useHistory()
 
@@ -38,13 +37,13 @@ export default function SubmissionView() {
       <Formik
         validateOnChange={false} validateOnBlur={true}
         initialValues = {{
-          name: '',
-          cnic: '',
-          phoneNumber: '',
-          location:'',
-          salary:'',
-          occupation:'',
-          familyMembersNumber:'',
+          name: formData.name,
+          cnic: formData.cnic,
+          phoneNumber: formData.number,
+          location: formData.location,
+          salary: formData.salary,
+          occupation: formData.occupation,
+          familyMembersNumber: formData.numFam,
         }}
         validationSchema = {Yup.object({
           name: Yup.string()
@@ -68,19 +67,14 @@ export default function SubmissionView() {
           .required('Required')
           ,
         })}
-        onSubmit={(values, { setSubmitting }) => {
-          // dispatch(changePassword({ name: values.name, cnic: values.cnic}))
-          // .then(() => {
-          //   setSubmitting(false)
-          // })
-          console.log("Submitted")  
-        }}
-        >
+      >
         {({onSubmit, isSubmitting})=>{
+          // {console.log(name)}
           return(
           <Form style={{paddingBottom: "15%"}}>
             <Field
             component={TextField}
+            disabled
             variant="outlined"
             margin="normal"
             required
@@ -94,6 +88,7 @@ export default function SubmissionView() {
             component={TextField}
             variant="outlined"
             margin="normal"
+            disabled
             required
             fullWidth
             label="CNIC"
@@ -103,17 +98,19 @@ export default function SubmissionView() {
 
             <Field
             component={TextField}
+            disabled
             variant="outlined"
             margin="normal"
             required
             fullWidth
             label="Phone Number"
-            name="Phone Number"
+            name="phoneNumber"
             ></Field>
             <br/>
 
             <Field
             component={TextField}
+            disabled
             variant="outlined"
             margin="normal"
             required
@@ -125,6 +122,7 @@ export default function SubmissionView() {
             
             <Field
             component={TextField}
+            disabled
             variant="outlined"
             margin="normal"
             required
@@ -136,6 +134,7 @@ export default function SubmissionView() {
 
             <Field
             component={TextField}
+            disabled
             variant="outlined"
             margin="normal"
             required
@@ -147,6 +146,7 @@ export default function SubmissionView() {
             
             <Field
             component={TextField}
+            disabled
             variant="outlined"
             margin="normal"
             required
@@ -156,12 +156,12 @@ export default function SubmissionView() {
             ></Field>
             <br/>
                   
-            {isSubmitting && <LinearProgress />}
-            <div className={classes.displayIcons}>
+            {/* {isSubmitting && <LinearProgress />} */}
+            {/* <div className={classes.displayIcons}>
               <div style={{float: "right"}}>
                 <Button type="submit" variant="contained" color="primary" onClick={onSubmit}>Close Form</Button>
               </div>
-            </div>
+            </div> */}
           </Form>
           )
         }}

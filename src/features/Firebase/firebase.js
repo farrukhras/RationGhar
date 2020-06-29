@@ -22,7 +22,6 @@ class Firebase {
 	}
 	
 	// *** Auth API ***
-
   doCreateUserWithEmailAndPassword = (email, password) =>
 		this.auth.createUserWithEmailAndPassword(email, password)
 		
@@ -34,8 +33,9 @@ class Firebase {
 	// *** User API ***
 
 	user = uid => this.db.ref(`users/${uid}`)
-	currUserId = () => this.db.ref('currUserId')
-  users = () => this.db.ref('users')
+	users = () => this.db.ref('users')
+	form = fid => this.db.ref(`forms/${fid}`)
+	forms = () => this.db.ref('forms')
 }
 
 export default Firebase

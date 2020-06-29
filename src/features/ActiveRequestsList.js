@@ -1,20 +1,43 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import MUIDataTable from "mui-datatables"
+import { withFirebase } from './Firebase'
+import ErrorSnackbar from '../ui/ErrorSnackbar'
 
-export default function ActiveRequestsList() {
+function ActiveRequestsList(props) {
+	const [data, setData]= useState([])
+	const [error, setError]= useState(null)
+
+	useEffect(() => {
+		async function enableApp() {
+			await props.firebase.forms().once('value', snapshot => {
+				const formsObject = snapshot.val()
+				
+				const tempList = []
+				
+				if (formsObject === null) {
+					setError(!error)
+					// console.log("Forms not Present")
+				} else {
+					Object.keys(formsObject).map(key => {
+						const tempData = [
+							formsObject[key].cnic,
+							formsObject[key].location,
+							formsObject[key].assignedToNGOName === "" ? "none" : formsObject[key].assignedToNGOName,
+							formsObject[key].ngoNum === "" ? "none" : formsObject[key].ngoNum,
+							formsObject[key].complete
+						]
+				
+						tempList.push(tempData)
+					})
+					setData(tempList)
+				}
+			})
+		}
+		enableApp()
+	}, [])
+
 	const columns = ["ID", "Location", "Assigned NGO", "NGO Contact", "Status"]
 
-	const data = [
-		["1", "Lahore", "Hamza Foundation", "0333", "Fulfilled"],
-		["2", "Karachi", "Zoraiz Foundation", "0332", "In Progress"],
-		["3", "Islamabad", "Ahmed Foundation", "0331", "Fulfilled"],
-		["4", "Peshawar", "Farrukh Foundation", "0330", "Fulfilled"],
-		["5", "Quetta", "Ramez Foundation", "0334", "In Progress"],
-		["6", "Multan", "Aiyan Foundation", "0335", "In Progress"],
-		["7", "Kashmir", "Raahim Foundation", "0336", "Fulfilled"],
-		["8", "Lahore", "XYZ Foundation", "0337", "Fulfilled"],
-	]
-	
 	const options = {
     download: false,
     disableToolbarSelect: true,
@@ -31,6 +54,9 @@ export default function ActiveRequestsList() {
 				columns={columns}
 				options={options}
 			/>
+			{error && <ErrorSnackbar stateError={"No Active Forms"}/>}
 		</div>
 	)
 }
+
+export default withFirebase(ActiveRequestsList)

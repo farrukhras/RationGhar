@@ -13,16 +13,16 @@ import { withFirebase } from './Firebase'
 const useStyles = makeStyles(theme=>({
   root: {
     position: 'absolute',
-    maxWidth: '100vw',
-    height: '100%',
-    // backgroundColor: "#1A1A1D",
+    minWidth: '100%',
+    // height: '100%',
+    backgroundColor: "#1A1A1D",
     // backgroundImage: 'linear-gradient(to bottom, #e0c2c2 , #75a7a8)',
     color: theme.palette.secondary.main
   },
   details: {
     textAlign: "center",
-    marginTop: "5%",
-    fontSize: "500%",
+    marginLeft: "10%",
+    fontSize: "400%",
     textShadow: '3px 3px #ff0000',
     fontWeight: 'bold',
   },
@@ -49,7 +49,7 @@ function HomePage(props) {
         <Link to={link} style={{ textDecoration: 'none' }}>
           <Card style={{
             width: 200,
-            height: 200,
+            height: 100,
             border: 30,
             padding: 60,
             margin: 20,
@@ -74,10 +74,7 @@ function HomePage(props) {
     async function enableApp() {
       await props.firebase.users().once('value', snapshot => {
         const usersObject = snapshot.val()
-        if (usersObject === null) {
-          console.log("EMPTY")
-        } else {
-          console.log("NOT EMPTY")
+        if (usersObject !== null) {
           var usersList = []
           Object.keys(usersObject).map(key => {
             usersList.push(usersObject[key].name)
@@ -92,9 +89,8 @@ function HomePage(props) {
   
   return (
     <div>
-      <img style={{width: '100vw', height: '100vh', float: 'left'}}
-      src={homebg} alt="RationGhar"/>
       
+      {/* <img style={{width: '100vw', height: '100vh', float: 'left'}} src={homebg} alt="RationGhar"/> */}
       <Container component="main" className={classes.root}>
         <div>
           <Link to='/login'>
@@ -104,7 +100,7 @@ function HomePage(props) {
           </Link>
         </div>
         <div>
-          <h1 className={classes.details}>Ration Ghar</h1>
+          <p className={classes.details}>Ration Ghar</p>
           
           {/* <img style={{position: 'absolute', left: '45vw', width: '10vw', height: '20vh'}}
           src={logo} alt="RationGharlogo"/> */}
@@ -114,8 +110,8 @@ function HomePage(props) {
               <h1 style={{marginLeft: "15vh", fontSize: "300%",textShadow: '3px 3px #ff0000'}}>100+</h1> {/** replace this number with the total rations served once backend linked*/}
               <h4 style={{marginLeft: "12vh"}}>Rations Delivered</h4>
             </div>
-            <div style={{float: "left", textAlign: "center",  width:"33.33333%", marginTop: "2vh"}}>
-              <span>Ration Ghar is an initiative to provide plateform to Non-Government Organizations to reach out to those 
+            <div style={{float: "left", textAlign: "center",  width:"33.33333%", marginTop: "7vh"}}>
+              <span>Ration Ghar is an initiative to provide platform to Non-Government Organizations to reach out to those 
                 who are in dire need of food and daily necessities especially during the difficult times of COVID'19</span>
             </div>
             <div style={{float: "right", textAlign: "right",  width:"33.33333%"}}>
