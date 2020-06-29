@@ -13,9 +13,6 @@ const useStyles = makeStyles(theme=>({
   root: {
     position: 'absolute',
     minWidth: '100%',
-    // height: '100%',
-    // backgroundColor: "#1A1A1D",
-    // backgroundImage: 'linear-gradient(to bottom, #e0c2c2 , #75a7a8)',
     color: theme.palette.secondary.main
   },
   details: {
@@ -39,6 +36,7 @@ const useStyles = makeStyles(theme=>({
 
 function HomePage(props) {
   const [users, setUsers] = useState([])
+  const [delivered, setDelivered] = useState(0)
 
   const classes = useStyles()
   const image = 'https://images.vexels.com/media/users/3/148166/isolated/preview/488f0787445ac3d5e112561829ec5467-abstract-orange-square-background-by-vexels.png'
@@ -71,7 +69,7 @@ function HomePage(props) {
   }
 
   useEffect(() => {
-    async function enableApp() {
+    async function enableUser() {
       await props.firebase.users().once('value', snapshot => {
         const usersObject = snapshot.val()
         if (usersObject !== null) {
@@ -83,8 +81,24 @@ function HomePage(props) {
         }
       })
     }
+
+    async function enableForms() {
+      await props.firebase.forms().once('value', snapshot => {
+        const formsObject = snapshot.val()
+        if (formsObject !== null) {
+          var counter = 0
+          Object.keys(formsObject).map(key => {
+            if (formsObject[key].complete === "Fulfilled") {
+              counter += 1
+            }
+          })
+          setDelivered(counter)
+        }
+      })
+    }
     
-    enableApp()
+    enableUser()
+    enableForms()
   }, [])
   
   return (
@@ -100,13 +114,9 @@ function HomePage(props) {
         </div>
         <div>
           <p className={classes.details}>Ration Ghar</p>
-          
-          {/* <img style={{position: 'absolute', left: '45vw', width: '10vw', height: '20vh'}}
-          src={logo} alt="RationGharlogo"/> */}
-          
           <div>
             <div style={{float: "left", textAlign: "left", width:"33.33333%"}}>
-              <h1 style={{marginLeft: "15vh", fontSize: "300%", textShadow: '3px 3px #ff0000'}}>100+</h1> {/** replace this number with the total rations served once backend linked*/}
+              <h1 style={{marginLeft: "28%", fontSize: "300%", textShadow: '3px 3px #ff0000'}}>{delivered !== 0 ? `${delivered}+` : "0"}</h1>
               <h4 style={{marginLeft: "12vh"}}>Rations Delivered</h4>
             </div>
             <div style={{float: "left", textAlign: "center",  width:"33.33333%", marginTop: "7vh"}}>
@@ -114,7 +124,7 @@ function HomePage(props) {
                 who are in dire need of food and daily necessities especially during the difficult times of COVID'19</span>
             </div>
             <div style={{float: "right", textAlign: "right",  width:"33.33333%"}}>
-              <h1 style={{marginRight: "15vh", fontSize: "300%",textShadow: '3px 3px #ff0000'}}>{users.length}+</h1>
+              <h1 style={{marginRight: "25%", fontSize: "300%",textShadow: '3px 3px #ff0000'}}>{users.length}+</h1>
               <h4 style={{marginRight: "12vh"}}>Partnered NGO's</h4>
             </div>
           </div>

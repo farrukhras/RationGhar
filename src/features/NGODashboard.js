@@ -35,12 +35,13 @@ const useStyles = makeStyles(theme=>({
 
 function NGODashboard(props) {
   const [userName, setUserName] = useState('')
+  const [delivered, setDelivered] = useState(0)
 
 	const classes = useStyles()
   const image = 'https://images.vexels.com/media/users/3/148166/isolated/preview/488f0787445ac3d5e112561829ec5467-abstract-orange-square-background-by-vexels.png'
 
   useEffect(() => {
-    async function enableApp() {
+    async function enableUser() {
       await props.firebase.users().once('value', snapshot => {
         const usersObject = snapshot.val()
         
@@ -58,7 +59,31 @@ function NGODashboard(props) {
         }
       })
     }
-    enableApp()
+
+    async function enableForm() {
+      await props.firebase.forms().once('value', snapshot => {
+        const formsObject = snapshot.val()
+        
+        if (formsObject !== null) {
+          var counter = 0
+          if (props.firebase.auth.currentUser !== null) {
+            const currUserId = props.firebase.auth.currentUser.uid
+
+            Object.keys(formsObject).map(key => {
+              if (currUserId === formsObject[key].assignedTo) {
+                if (formsObject[key].complete === "Fulfilled") {
+                  counter += 1
+                }
+              }
+            })
+            setDelivered(counter)
+          }
+        }
+      })
+    }
+
+    enableUser()
+    enableForm()
   }, [])
 
   function SettingsLinkBox({text, bgImage, link, icon}){ // same function as one used in CMS by Hamza
@@ -94,7 +119,7 @@ function NGODashboard(props) {
 			<img style={{width: '100vw', height: '100%', float: 'left'}} src={homebg} alt="RationGhar"/>
 			<Container component="main" className={classes.root}>
 				<div className={classes.colorSet} style={{textAlign: "center"}}>
-					<h1>100+</h1> {/** replace this number with the total rations served once backend linked*/}
+          <h1 style={{fontSize: "300%"}}>{delivered !== 0 ? `${delivered}+` : "0"}</h1>
           <h2>Rations Delivered</h2>
 				</div>
 				<Grid container direction="row" justify="center" alignItems="center">
