@@ -7,7 +7,6 @@ import FormatListBulletedIcon from '@material-ui/icons/FormatListBulleted'
 import { Link } from 'react-router-dom'
 import Fab from '@material-ui/core/Fab'
 import homebg from './home.jpg'
-import logo from './Logo.png'
 import { withFirebase } from './Firebase'
 
 const useStyles = makeStyles(theme=>({
@@ -15,7 +14,7 @@ const useStyles = makeStyles(theme=>({
     position: 'absolute',
     minWidth: '100%',
     // height: '100%',
-    backgroundColor: "#1A1A1D",
+    // backgroundColor: "#1A1A1D",
     // backgroundImage: 'linear-gradient(to bottom, #e0c2c2 , #75a7a8)',
     color: theme.palette.secondary.main
   },
@@ -25,6 +24,7 @@ const useStyles = makeStyles(theme=>({
     fontSize: "400%",
     textShadow: '3px 3px #ff0000',
     fontWeight: 'bold',
+    marginBottom: -10
   },
   displayIcons: {
     display: "inline-block",
@@ -89,8 +89,7 @@ function HomePage(props) {
   
   return (
     <div>
-      
-      {/* <img style={{width: '100vw', height: '100vh', float: 'left'}} src={homebg} alt="RationGhar"/> */}
+      <img style={{width: '100vw', height: '100%', float: 'left'}} src={homebg} alt="RationGhar"/>
       <Container component="main" className={classes.root}>
         <div>
           <Link to='/login'>
@@ -107,7 +106,7 @@ function HomePage(props) {
           
           <div>
             <div style={{float: "left", textAlign: "left", width:"33.33333%"}}>
-              <h1 style={{marginLeft: "15vh", fontSize: "300%",textShadow: '3px 3px #ff0000'}}>100+</h1> {/** replace this number with the total rations served once backend linked*/}
+              <h1 style={{marginLeft: "15vh", fontSize: "300%", textShadow: '3px 3px #ff0000'}}>100+</h1> {/** replace this number with the total rations served once backend linked*/}
               <h4 style={{marginLeft: "12vh"}}>Rations Delivered</h4>
             </div>
             <div style={{float: "left", textAlign: "center",  width:"33.33333%", marginTop: "7vh"}}>

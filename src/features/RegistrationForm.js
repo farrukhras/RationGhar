@@ -36,7 +36,7 @@ function RegistrationPage(props) {
   let history = useHistory()
 
   return (
-    <div style={{backgroundImage: 'linear-gradient(to right, #e0c2c2 , blue)', padding: "10px"}}>
+    <div style={{background: '#0C1E2A', padding: "10px"}}>
       <Container component="main" maxWidth="xs" style={{backgroundColor: 'white', borderStyle: 'solid', borderColor: '#baa5a5'}}> 
         <Typography variant="h4" className={classes.rationGharTitle}>
           Ration Registration Form

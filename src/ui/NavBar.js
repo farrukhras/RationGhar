@@ -1,6 +1,6 @@
 import React from 'react'
 import { makeStyles } from '@material-ui/core/styles'
-import {AppBar, Toolbar, IconButton, Avatar, Typography, Grid, Tooltip} from '@material-ui/core'
+import {AppBar, Toolbar, Avatar, Typography, Grid, Tooltip} from '@material-ui/core'
 import SignOut from '../features/SignOut'
 
 const useStyles = makeStyles((theme) => ({

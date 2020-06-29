@@ -7,6 +7,7 @@ import FilterListIcon from '@material-ui/icons/FilterList';
 import ListIcon from '@material-ui/icons/List';
 import { Link } from 'react-router-dom'
 import { withFirebase } from './Firebase'
+import homebg from './home.jpg'
 
 const useStyles = makeStyles(theme=>({
   root: {
@@ -27,6 +28,9 @@ const useStyles = makeStyles(theme=>({
     color: theme.palette.secondary.main,
     fontWeight: 500
   },
+  colorSet: {
+    color: "#ffffff"
+  }
 }))
 
 function NGODashboard(props) {
@@ -85,10 +89,11 @@ function NGODashboard(props) {
   }
 
 	return (
-		<div style={{backgroundImage: "url('https://s3-eu-west-1.amazonaws.com/images.danb.me/trello-backgrounds/pink.jpg')", height: "100vh", backgroundSize: "100% 100%"}}>
-			<NavBar userName={userName}/>
+		<div>
+      <NavBar userName={userName}/>
+			<img style={{width: '100vw', height: '100%', float: 'left'}} src={homebg} alt="RationGhar"/>
 			<Container component="main" className={classes.root}>
-				<div style={{textAlign: "center"}}>
+				<div className={classes.colorSet} style={{textAlign: "center"}}>
 					<h1>100+</h1> {/** replace this number with the total rations served once backend linked*/}
           <h2>Rations Delivered</h2>
 				</div>
