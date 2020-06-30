@@ -8,6 +8,7 @@ import RegistrationForm from './features/RegistrationForm'
 import NGODashboard from './features/NGODashboard'
 import LoginPage from './features/LoginPage'
 import SignUpPage from './features/SignUpPage'
+import ChangePassword from './features/ChangePassword'
 import AllRequestList from './features/AllRequestList'
 import AssignedRequests from './features/AssignedRequests'
 import SubmissionView from './features/SubmissionView'
@@ -58,6 +59,7 @@ function App(props) {
             <Route path="/login" component={LoginPage}/>
             <Route path="/signup" component={SignUpPage}/>
             <Route path="/ngo-dashboard" component={authUser ? NGODashboard : LoginPage}/>
+            <Route path="/change-password" exact component={authUser ? ChangePassword : LoginPage}/>
             <Route path="/request-list" component={authUser ? AllRequestList : LoginPage}/>
             <Route path="/assigned-list" component={authUser ? AssignedRequests : LoginPage}/>
             <Route path="/submission-view" component={authUser ? SubmissionView : LoginPage}/>

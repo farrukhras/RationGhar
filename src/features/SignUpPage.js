@@ -34,12 +34,12 @@ function SignUpForm(props) {
   const [success, setSuccess] = useState(null)
 
   const classes = useStyles()
-  let history = useHistory()
+  const history = useHistory()
 
   return (
     <div style={{backgroundImage: 'linear-gradient(to right, #e0c2c2 , blue)'}}>
       <Container component="main" maxWidth="xs" style={{backgroundColor: 'white', borderStyle: 'solid', borderColor: '#baa5a5'}}> 
-      <Typography variant="h4" className={classes.rationGharTitle}>
+        <Typography variant="h4" className={classes.rationGharTitle}>
           Sign Up for RationGhar
         </Typography>
       
