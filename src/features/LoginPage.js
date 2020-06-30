@@ -113,12 +113,11 @@ function LoginForm(props) {
                 <div style={{float: "left"}}>
                   <Link to='/signup'>
                     <Fab
-                    style={{backgroundColor: "#C3073F90"}}
+                    style={{backgroundColor: "#C3073F"}}
                     size="large" 
-                    // onClick={submitForm} 
-                    // type="submit"
+                    color="primary"
                     variant="contained" 
-                    color="secondary" 
+                    // color="secondary" 
                     spacing= '10'
                     // endIcon={<NavigateNextIcon/>}
                     className={classes.extendedIcon}
@@ -130,14 +129,12 @@ function LoginForm(props) {
                 </div>
                 <div style={{float: "right"}}>
                   <Fab 
-                    style={{backgroundColor: "#C3073F90"}}
+                    style={{backgroundColor: "#C3073F"}}
                     size="large" 
                     onClick={submitForm} 
-                    // type="submit"
                     variant="extended" 
-                    color="secondary" 
+                    color="primary" 
                     spacing= '20'
-                    // endIcon={<NavigateNextIcon/>}
                     className={classes.extendedIcon}
                   >
                     <h3>Login</h3>

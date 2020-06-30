@@ -17,7 +17,7 @@ export default function NavBar({userName}) {
 	
   return (
     <div>
-      <AppBar position="static">
+      <AppBar position="static" style={{backgroundColor: "#FCCC77"}}>
         <Toolbar style={{minHeight: 50}}>
 					<div className={classes.displayIcons}>
 						<div style={{float: "left"}}>

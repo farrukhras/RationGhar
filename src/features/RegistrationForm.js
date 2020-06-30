@@ -9,10 +9,15 @@ import { compose } from 'recompose'
 import { withFirebase } from './Firebase'
 import Fab from '@material-ui/core/Fab'
 import ErrorSnackbar from '../ui/ErrorSnackbar'
+import homebg from './home.jpg'
+import Button from '@material-ui/core/Button'
 
 const useStyles = makeStyles((theme) => ({
 	root: {
     flexGrow: 1,
+    position: 'absolute',
+    minWidth: '100%',
+    color: theme.palette.secondary.main
 	},
 	rationGharTitle: {
     padding: "25px 0 10px 0",
@@ -36,8 +41,11 @@ function RegistrationPage(props) {
   let history = useHistory()
 
   return (
-    <div style={{background: '#0C1E2A', padding: "10px"}}>
-      <Container component="main" maxWidth="xs" style={{backgroundColor: 'white', borderStyle: 'solid', borderColor: '#baa5a5'}}> 
+    <div>
+      <img style={{width: '100vw', height: '100%', float: 'left'}} src={homebg} alt="RationGhar"/>
+      
+      <Container component="main" className={classes.root}>
+      <Container component="main" maxWidth="sm" style={{backgroundColor: '#feffd5', borderStyle: 'solid', borderColor: '#baa5a5', marginTop: 50}}> 
         <Typography variant="h4" className={classes.rationGharTitle}>
           Ration Registration Form
         </Typography>
@@ -123,7 +131,7 @@ function RegistrationPage(props) {
                   <p>Enter the Information Required</p>
                   <Field
                     component={TextField}
-                    variant="outlined"
+                    variant="filled"
                     margin="normal"
                     required
                     label="Name"
@@ -134,7 +142,7 @@ function RegistrationPage(props) {
 
                   <Field
                     component={TextField}
-                    variant="outlined"
+                    variant="filled"
                     margin="normal"
                     required
                     fullWidth
@@ -146,7 +154,7 @@ function RegistrationPage(props) {
 
                   <Field
                     component={TextField}
-                    variant="outlined"
+                    variant="filled"
                     margin="normal"
                     required
                     fullWidth
@@ -157,7 +165,7 @@ function RegistrationPage(props) {
 
                   <Field
                     component={TextField}
-                    variant="outlined"
+                    variant="filled"
                     margin="normal"
                     required
                     fullWidth
@@ -168,7 +176,7 @@ function RegistrationPage(props) {
                   
                   <Field
                     component={TextField}
-                    variant="outlined"
+                    variant="filled"
                     margin="normal"
                     required
                     fullWidth
@@ -179,7 +187,7 @@ function RegistrationPage(props) {
 
                   <Field
                     component={TextField}
-                    variant="outlined"
+                    variant="filled"
                     margin="normal"
                     required
                     fullWidth
@@ -190,7 +198,7 @@ function RegistrationPage(props) {
                   
                   <Field
                     component={TextField}
-                    variant="outlined"
+                    variant="filled"
                     margin="normal"
                     required
                     fullWidth
@@ -201,17 +209,18 @@ function RegistrationPage(props) {
                 </div>
 
                 <div className={classes.displayIcons}>
-                  <div style={{float: "left"}}>
-                    <Fab variant="contained" onClick={() => history.goBack()}>Back</Fab>
+                  <div style={{float: "left", width: '200'}}>
+                    <Button variant="contained" size="large" color="primary" style={{backgroundColor: '#C3073F'}} onClick={() => history.goBack()}>Back</Button>
                   </div>
                   <div style={{float: "right"}}>
-                    <Fab variant="contained" color="primary" onClick={submitForm}>Submit Form</Fab>
+                    <Button variant="contained" size="large" color="primary" style={{backgroundColor: '#C3073F'}} onClick={submitForm}>Submit Form</Button>
                   </div>
                 </div>
               </Form>
             )
           }}
         </Formik>
+      </Container>
       </Container>
     </div>
     )

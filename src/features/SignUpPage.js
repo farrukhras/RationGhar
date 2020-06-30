@@ -10,10 +10,15 @@ import { withFirebase } from './Firebase'
 import Fab from '@material-ui/core/Fab'
 import ErrorSnackbar from '../ui/ErrorSnackbar'
 // import ChatBot from 'react-simple-chatbot';
+import homebg from './home.jpg'
+import Button from '@material-ui/core/Button'
 
 const useStyles = makeStyles((theme) => ({
 	root: {
     flexGrow: 1,
+    position: 'absolute',
+    minWidth: '100%',
+    color: theme.palette.secondary.main
 	},
 	rationGharTitle: {
     padding: "25px 0 10px 0",
@@ -38,7 +43,11 @@ function SignUpForm(props) {
 
   return (
     <div style={{backgroundImage: 'linear-gradient(to right, #e0c2c2 , blue)'}}>
-      <Container component="main" maxWidth="xs" style={{backgroundColor: 'white', borderStyle: 'solid', borderColor: '#baa5a5'}}> 
+      <img style={{width: '100vw', height: '100%', float: 'left'}} src={homebg} alt="RationGhar"/>
+      
+      <Container component="main" className={classes.root}>
+      <Container component="main" maxWidth="sm" style={{backgroundColor: '#feffd5', borderStyle: 'solid', borderColor: '#baa5a5', marginTop: 50}}> 
+      
       <Typography variant="h4" className={classes.rationGharTitle}>
           Sign Up for RationGhar
         </Typography>
@@ -194,10 +203,10 @@ function SignUpForm(props) {
                 </div>
                 <div className={classes.displayIcons}>
                   <div style={{float: "left"}}>
-                    <Fab style={{backgroundColor: "#C3073F90"}} color="primary" variant="contained" onClick={() => history.goBack()}><h3>Back</h3></Fab>
+                    <Fab style={{backgroundColor: "#C3073F"}} color="primary" variant="contained" onClick={() => history.goBack()}><h3>Back</h3></Fab>
                   </div>
                   <div style={{float: "right"}}>
-                    <Fab style={{backgroundColor: "#C3073F90"}} variant="contained" color="primary" onClick={submitForm}><h3>Sign Up</h3></Fab>
+                    <Fab style={{backgroundColor: "#C3073F"}} variant="contained" color="primary" onClick={submitForm}><h3>Sign Up</h3></Fab>
                   </div>
                 </div>
               </Form>
@@ -228,6 +237,7 @@ function SignUpForm(props) {
         /> */}
         {success && <ErrorSnackbar stateError={"Account Created Successfully!"}/>}
         {error && <ErrorSnackbar stateError={error.message}/>}
+      </Container>
       </Container>
     </div>
   )
