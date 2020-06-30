@@ -91,10 +91,10 @@ function NGODashboard(props) {
       <Grid item>
         <Link to={link} style={{ textDecoration: 'none' }}>
           <Card style={{
-            width: 150,
-            height: 100,
+            width: 250,
+            height: 200,
             border: 30,
-            padding: 40,
+            padding: 50,
             margin: 20,
             borderRadius: '10%',
             backgroundImage:bgImage,
