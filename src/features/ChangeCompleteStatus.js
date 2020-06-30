@@ -8,7 +8,6 @@ function ChangeFormStatusSelect(props) {
 	const [open, setOpen] = useState(false)
 	const [error, setError] = useState(null)
 	const [success, setSuccess] = useState(null)
-	var status = ""
 
   function handleChange(e) {
 		const newStatus = e.target.value
