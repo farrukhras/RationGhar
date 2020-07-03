@@ -8,6 +8,7 @@ import ListIcon from '@material-ui/icons/List';
 import { Link } from 'react-router-dom'
 import { withFirebase } from './Firebase'
 import homebg from './home.jpg'
+import LockIcon from '@material-ui/icons/Lock'
 
 const useStyles = makeStyles(theme=>({
   root: {
@@ -122,6 +123,7 @@ function NGODashboard(props) {
           <h1 style={{fontSize: "300%"}}>{delivered !== 0 ? `${delivered}+` : "0"}</h1>
           <h2>Rations Delivered</h2>
 				</div>
+
 				<Grid container direction="row" justify="center" alignItems="center">
 					<SettingsLinkBox 
 						text="View All Requests" 
@@ -137,6 +139,15 @@ function NGODashboard(props) {
 						icon={<FilterListIcon />}
 					/>
 				</Grid>
+
+        <Grid container direction="row" justify="center" alignItems="center">
+          <SettingsLinkBox 
+          text="Change Password" 
+          link="/change-password"
+          bgImage={`linear-gradient(to bottom, #3578FA70, #736BE8),url(${image})`}
+          icon={<LockIcon/>}
+          />
+        </Grid>
 			</Container>
 		</div>
 	)

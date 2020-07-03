@@ -2,10 +2,9 @@ import React from 'react'
 import {Formik, Form, Field} from 'formik'
 import * as Yup from 'yup'
 import { makeStyles } from '@material-ui/core/styles'
-import Button from '@material-ui/core/Button'
-import {Container, LinearProgress,Typography, Box} from '@material-ui/core'
+import {Container ,Typography } from '@material-ui/core'
 import { TextField } from 'formik-material-ui'
-import { useHistory } from 'react-router-dom'
+// import { useHistory } from 'react-router-dom'
 
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -27,7 +26,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function SubmissionView({cnic, formData}) {
   const classes = useStyles()
-  let history = useHistory()
+  // let history = useHistory()
 
 	return (
 		<Container component="main" maxWidth="xs"> 

@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import {Formik, Form, Field} from 'formik'
 import * as Yup from 'yup'
 import { makeStyles } from '@material-ui/core/styles'
-import {Container, LinearProgress,Typography} from '@material-ui/core'
+import {Container ,Typography} from '@material-ui/core'
 import { TextField } from 'formik-material-ui'
 import { useHistory, withRouter } from 'react-router-dom'
 import { compose } from 'recompose'
@@ -77,9 +77,6 @@ function RegistrationPage(props) {
               .required('Required'),
           })}
           onSubmit={(values, { setSubmitting }) => {
-            console.log(values)
-            console.log("here")
-
             const name = values.name
             const cnic = values.cnic
             const number = values.phoneNumber
@@ -110,7 +107,8 @@ function RegistrationPage(props) {
                 ngoNum
               })
               .then(() => {
-                props.history.push('/')
+                setError("Form Submitted Successfully!!")
+                // props.history.push('/')
               })
               .catch(error => {
                 values.name = ''
@@ -220,6 +218,8 @@ function RegistrationPage(props) {
             )
           }}
         </Formik>
+
+        {error && <ErrorSnackbar stateError={error}/>}
       </Container>
       </Container>
     </div>

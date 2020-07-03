@@ -2,8 +2,7 @@ import React, { useState } from 'react'
 import {Formik, Form, Field} from 'formik'
 import * as Yup from 'yup'
 import { makeStyles } from '@material-ui/core/styles'
-import { Button, Container, Grid } from '@material-ui/core'
-import NavigateNextIcon from '@material-ui/icons/NavigateNext'
+import { Container } from '@material-ui/core'
 import { TextField } from 'formik-material-ui'
 import loginbg from './loginbg.jpg'
 import { Link, withRouter } from 'react-router-dom'
@@ -11,7 +10,6 @@ import { compose } from 'recompose'
 import { withFirebase } from './Firebase'
 import ErrorSnackbar from '../ui/ErrorSnackbar'
 import Fab from '@material-ui/core/Fab'
-import { sizing } from '@material-ui/system'
 
 const useStyles = makeStyles(theme=>({
 	root: {
@@ -21,8 +19,6 @@ const useStyles = makeStyles(theme=>({
     marginTop: 0,
     height: '100%',
     backgroundColor: "#DBDBDA",
-    // backgroundImage: 'linear-gradient(to bottom, #EAB474, #952727)',
-    
     color: theme.palette.secondary.main
 	},
 	input: {
@@ -48,34 +44,35 @@ function LoginForm(props) {
       src={loginbg} alt="RationGhar"/>
       
       <div style={{marginTop: '30vh', marginLeft: '3vw'}}>
-      <Formik
-        validateOnChange={false} validateOnBlur={true}
-        initialValues = {{
-            email: '',
-            password: '',
-        }}
-        validationSchema={Yup.object({
-            email: Yup.string()
-              .email('Invalid Email Address')
-              .required('Required'),
-            password: Yup.string()
-              .required('Required')
-        })}
-        onSubmit={(values, { setSubmitting }) => {
-          const email = values.email
-          const password = values.password
-          
-          props.firebase
-            .doSignInWithEmailAndPassword(email, password)
-            .then(() => {
-              props.history.push('/ngo-dashboard')
-            })
-            .catch(error => {
-              values.email = ''
-              values.password = ''
-              setError(error)
-            })
-        }}
+        <Formik
+          enableReinitialize
+          validateOnChange={false} validateOnBlur={true}
+          initialValues = {{
+              email: '',
+              password: '',
+          }}
+          validationSchema={Yup.object({
+              email: Yup.string()
+                .email('Invalid Email Address')
+                .required('Required'),
+              password: Yup.string()
+                .required('Required')
+          })}
+          onSubmit={(values, { setSubmitting }) => {
+            const email = values.email
+            const password = values.password
+
+            props.firebase
+              .doSignInWithEmailAndPassword(email, password)
+              .then(() => {
+                props.history.push('/ngo-dashboard')
+              })
+              .catch(error => {
+                values.email = ''
+                values.password = ''
+                setError(error)
+              })
+          }}
         >
           {({submitForm, isSubmitting})=>(
             <Form>
@@ -145,7 +142,7 @@ function LoginForm(props) {
           )}
         </Formik>
         {error && <ErrorSnackbar stateError={error.message}/>}
-        </div>
+      </div>
     </Container>
   )
 }

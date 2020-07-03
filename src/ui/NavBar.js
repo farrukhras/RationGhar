@@ -33,7 +33,9 @@ export default function NavBar({userName}) {
 							</Grid>
             </div>
             <div style={{float: "right"}}>
-							<SignOut/>
+              <Tooltip title="Log Out" placement="left">
+							  <SignOut/>
+              </Tooltip>
             </div>
 					</div>
         </Toolbar>

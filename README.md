@@ -1,7 +1,10 @@
 # RationGhar
 
 RationGhar is a food distribution platform to connect NGO's and community service organizations with needy people in the time of Covid'19.
- 
+
+## Deployed Link
+https://rationghar-112.web.app/
+
 ## Features
 - **Login**, **Sign Up** and **Sign Out**
 - **Public Homepage:** The page displays the total number of NGO's registed and the total number of rations(food packages) delivered by all NGO's. In addition, there are tabs to navigate the users to a Registration Form and a list, of all the active requests. 

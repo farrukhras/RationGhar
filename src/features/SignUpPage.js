@@ -39,16 +39,12 @@ function SignUpForm(props) {
   const [success, setSuccess] = useState(null)
 
   const classes = useStyles()
-  let history = useHistory()
+  const history = useHistory()
 
   return (
     <div style={{backgroundImage: 'linear-gradient(to right, #e0c2c2 , blue)'}}>
-      <img style={{width: '100vw', height: '100%', float: 'left'}} src={homebg} alt="RationGhar"/>
-      
-      <Container component="main" className={classes.root}>
-      <Container component="main" maxWidth="sm" style={{backgroundColor: '#feffd5', borderStyle: 'solid', borderColor: '#baa5a5', marginTop: 50}}> 
-      
-      <Typography variant="h4" className={classes.rationGharTitle}>
+      <Container component="main" maxWidth="xs" style={{backgroundColor: 'white', borderStyle: 'solid', borderColor: '#baa5a5'}}> 
+        <Typography variant="h4" className={classes.rationGharTitle}>
           Sign Up for RationGhar
         </Typography>
       
@@ -237,7 +233,6 @@ function SignUpForm(props) {
         /> */}
         {success && <ErrorSnackbar stateError={"Account Created Successfully!"}/>}
         {error && <ErrorSnackbar stateError={error.message}/>}
-      </Container>
       </Container>
     </div>
   )

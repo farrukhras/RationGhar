@@ -20,7 +20,7 @@ const useStyles = makeStyles((theme) => ({
 
 function AssignedRequestsList(props) {
 	const [data, setData]= useState([])
-	const [error, setError] = useState(null)
+	// const [error, setError] = useState(null)
 	const [open, setOpen] = useState(false)
 	const classes = useStyles()
 	const [cnicUser, setCnicUser] = useState("")
@@ -81,7 +81,7 @@ function AssignedRequestsList(props) {
 								]
 
 								tempList.push(tempData)
-							}
+							} 
 						}
 					})
 					setData(tempList)
@@ -139,7 +139,7 @@ function AssignedRequestsList(props) {
         <SubmissionView cnic={cnicUser} formData={currFormData}/>
       </Dialog>
 
-			{error && <ErrorSnackbar stateError={error.message}/>}
+			{/* {error && <ErrorSnackbar stateError={error}/>} */}
 			{emptyList && <ErrorSnackbar stateError={"No Assigned Forms"}/>}
 		</div>
 	)
