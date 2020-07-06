@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import MUIDataTable from "mui-datatables"
-import { Button } from '@material-ui/core'
+import { Button, Box } from '@material-ui/core'
 import { withFirebase } from './Firebase'
 import ErrorSnackbar from '../ui/ErrorSnackbar'
 import SubmissionView from './SubmissionView'
@@ -143,6 +143,7 @@ function AllRequestsList(props) {
 					size="small"
 					variant = "contained"
 					onClick={() => handleClick({cnic, formData})}
+					style={{backgroundColor: "#6D3E58"}}
 				>
 					Select Request
 				</Button>
@@ -158,6 +159,7 @@ function AllRequestsList(props) {
 					size="small"
 					variant = "contained"
 					onClick={() => {handleClickOpen(name, cnic, number, location, salary, occupation, numFam)}}
+					style={{backgroundColor: "#6D3E58"}}
 				>
 					view form
 				</Button>
@@ -165,21 +167,45 @@ function AllRequestsList(props) {
 		)
 	}
 	
+	const columns = [
+		{
+			name:"ID",
+			options: {
+				customBodyRender: (value) => {
+					return (
+						<Typography style={{fontWeight: 600}}>
+							{value}
+						</Typography>
+					)
+				}
+			}
+		},
+		'Location',
+		{name: 'Salary', options: {filter: false}},
+		'Status',
+		{name: '', options: {filter: false, print: false, download: true, sort: false, viewColumns: false}},
+		{name: '', options: {filter: false, print: false, download: true, sort: false, viewColumns: false}}
+	]
 
-	const columns = ["ID", "Location", "Salary", "Status", "", ""]
-	
 	const options = {
     download: false,
     disableToolbarSelect: true,
     selectableRows:false,
 		rowsPerPage: 10,
-		print: false
-}
+		print: false,
+		searchPlaceholder: 'Search for a Request...',
+	}
 
 	return (
 		<div>
 			<MUIDataTable
-				title={"All Requests"}
+				title={
+					<Typography variant="h5">
+            <Box fontWeight={600}>
+							All Requests
+            </Box>
+					</Typography>
+				}
 				data={data}
 				columns={columns}
 				options={options}

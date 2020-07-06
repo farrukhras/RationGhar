@@ -17,13 +17,13 @@ export default function NavBar({userName}) {
 	
   return (
     <div>
-      <AppBar position="static" style={{backgroundColor: "#FCCC77"}}>
+      <AppBar position="static" style={{backgroundColor: "#6D3E58"}}>
         <Toolbar style={{minHeight: 50}}>
 					<div className={classes.displayIcons}>
 						<div style={{float: "left"}}>
 							<Grid container direction="row">
 								<Avatar
-									style={{width: 35, height: 35, marginLeft: -15}} 
+									style={{width: 35, height: 35, marginLeft: -10}} 
 									alt="NGO"
 									src="https://dcassetcdn.com/design_img/10133/25833/25833_303600_10133_image.jpg"
 								/>

@@ -32,7 +32,6 @@ function ChangeFormStatusSelect(props) {
     "In Progress": "#F1C231",
     "Fulfilled": "#009D5E",
 	}
-	
 
   return (
     <div>
@@ -44,7 +43,7 @@ function ChangeFormStatusSelect(props) {
           onClose={()=>setOpen(false)}
           value={localStatus}
           onOpen={()=>setOpen(true)}
-          style={{height: 30, width: 200, backgroundColor: statusColors[localStatus] + '60'}}
+          style={{height: 30, width: 130, backgroundColor: statusColors[localStatus] + '99'}}
           variant = "outlined"
           onChange={handleChange}
         >

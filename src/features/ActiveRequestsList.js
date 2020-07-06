@@ -11,7 +11,7 @@ function ActiveRequestsList(props) {
 	function StatusBackground({value}) {
 		return (
 			<Box borderRadius={5} color="secondary.main" style={{
-				backgroundColor: value === "In Progress" ? "#F1C231" : "#009D5E",
+				backgroundColor: value === "In Progress" ? "#F1C231": "#009D5E",
 				padding: 5,
 				maxWidth: '6vw',
 				textAlign: "center"
@@ -53,20 +53,44 @@ function ActiveRequestsList(props) {
 		enableApp()
 	}, [])
 
-	const columns = ["ID", "Location", "Assigned NGO", "NGO Contact", "Status"]
+	const columns = [
+		{
+			name:"ID",
+			options: {
+				customBodyRender: (value) => {
+					return (
+						<Typography style={{fontWeight: 600}}>
+							{value}
+						</Typography>
+					)
+				}
+			}
+		},
+		'Location',
+		"Assigned NGO",
+		{name: 'NGO Contact', options: {filter: false}},
+		{name: 'Status', options: {filter: false, print: false, download: true, sort: false}},
+	]
 
 	const options = {
     download: false,
     disableToolbarSelect: true,
     selectableRows:false,
 		rowsPerPage: 7,
-		print: false
+		print: false,
+		searchPlaceholder: 'Search for a Request...',
 }
 
 	return (
 		<div>
 			<MUIDataTable
-				title={"Active Request List"}
+				title={
+					<Typography variant="h5">
+						<Box fontWeight={600}>
+							Active Requests
+						</Box>
+					</Typography>
+				}
 				data={data}
 				columns={columns}
 				options={options}

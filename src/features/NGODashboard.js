@@ -8,29 +8,18 @@ import ListIcon from '@material-ui/icons/List';
 import { Link } from 'react-router-dom'
 import { withFirebase } from './Firebase'
 import homebg from './home.jpg'
+import landingbg from './landingBG.jpg'
 import LockIcon from '@material-ui/icons/Lock'
 
 const useStyles = makeStyles(theme=>({
   root: {
     position: 'absolute',
     maxWidth: '100vw',
-    height: '50%'
-  },
-  details: {
-    textAlign: "center",
-    marginTop: "5%"
-  },
-  displayIcons: {
-    display: "inline-block",
-    width: "100%",
-    float: "left",
+    // height: '50%'
   },
   settingsBoxText: {
     color: theme.palette.secondary.main,
     fontWeight: 500
-  },
-  colorSet: {
-    color: "#ffffff"
   }
 }))
 
@@ -92,10 +81,10 @@ function NGODashboard(props) {
       <Grid item>
         <Link to={link} style={{ textDecoration: 'none' }}>
           <Card style={{
-            width: 250,
-            height: 200,
+            width: 200,
+            height: 80,
             border: 30,
-            padding: 50,
+            padding: 40,
             margin: 20,
             borderRadius: '10%',
             backgroundImage:bgImage,
@@ -117,23 +106,23 @@ function NGODashboard(props) {
 	return (
 		<div>
       <NavBar userName={userName}/>
-			<img style={{width: '100vw', height: '100%', float: 'left'}} src={homebg} alt="RationGhar"/>
+			<img style={{width: '100vw', height: '100%', float: 'left'}} src={landingbg} alt="RationGhar"/>
 			<Container component="main" className={classes.root}>
-				<div className={classes.colorSet} style={{textAlign: "center"}}>
+				<div style={{textAlign: "center", color: "#ffffff"}}>
           <h1 style={{fontSize: "300%"}}>{delivered !== 0 ? `${delivered}+` : "0"}</h1>
           <h2>Rations Delivered</h2>
-				</div>
+				</div>  
 
 				<Grid container direction="row" justify="center" alignItems="center">
 					<SettingsLinkBox 
-						text="View All Requests" 
-						bgImage={`linear-gradient(to bottom,  #FFA40080, #FFC65F), url(${image})`}
+						text="All Requests" 
+						bgImage={`linear-gradient(to bottom, #FF6BAF70, #FF917C), url(${image})`}
 						link="/request-list"
 						icon={<ListIcon />}
 					/>
 
 					<SettingsLinkBox 
-						text="View Assigned Requests" 
+						text="Assigned Requests" 
 						bgImage={`linear-gradient(to bottom, #008A6470, #22C197),url(${image})`}
 						link="/assigned-list"
 						icon={<FilterListIcon />}

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import MUIDataTable from "mui-datatables"
-import { Button } from '@material-ui/core'
+import { Button, Box } from '@material-ui/core'
 import { withFirebase } from './Firebase'
 import ErrorSnackbar from '../ui/ErrorSnackbar'
 import SubmissionView from './SubmissionView'
@@ -57,7 +57,6 @@ function AssignedRequestsList(props) {
 				
 				if (formsObject === null) {
 					setEmptyList(!emptyList)
-					// console.log("Forms not Present")
 				} else {
 					Object.keys(formsObject).map(key => {
 						if (props.firebase.auth.currentUser !== null) {
@@ -99,6 +98,7 @@ function AssignedRequestsList(props) {
 					size="medium"
 					variant = "contained"
 					onClick={() => {handleClickOpen(name, cnic, number, location, salary, occupation, numFam)}}
+					style={{backgroundColor: "#6D3E58"}}
 				>
 					view form
 				</Button>
@@ -106,20 +106,44 @@ function AssignedRequestsList(props) {
 		)
 	}
 	
-	const columns = ["ID", "Location", "Salary", "Status", ""]
-	
+	const columns = [
+		{
+			name:"ID",
+			options: {
+				customBodyRender: (value) => {
+					return (
+						<Typography style={{fontWeight: 600}}>
+							{value}
+						</Typography>
+					)
+				}
+			}
+		},
+		'Location',
+		{name: 'Salary', options: {filter: false}},
+		{name: 'Status', options: {filter: false, print: false, download: true, sort: false}},
+		{name: '', options: {filter: false, print: false, download: true, sort: false, viewColumns: false}},
+	]
+
 	const options = {
 		download: false,
 		disableToolbarSelect: true,
 		selectableRows:false,
 		rowsPerPage: 10,
-		print: false
-}
+		print: false,
+		searchPlaceholder: 'Search for an Assigned Request...',
+	}
 
 	return (
 		<div>
 			<MUIDataTable
-				title={"Assigned Requests"}
+				title={
+					<Typography variant="h5">
+						<Box fontWeight={600}>
+						Assigned Requests
+						</Box>
+					</Typography>
+				}
 				data={data}
 				columns={columns}
 				options={options}
