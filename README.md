@@ -1,9 +1,11 @@
 # RationGhar
 
-RationGhar is a food distribution platform to connect NGO's and community service organizations with needy people in the time of Covid'19.
+RationGhar is a food distribution platform to connect NGO's and community service organizations with needy people in the time of COVID'19.
+
+Project made for AtlasHacks Hackathon organized by DevPost. The project can be found on [Devpost](https://devpost.com/software/rationghar).
 
 ## Deployed Link
-https://rationghar-112.web.app/
+https://rationghar.herokuapp.com/
 
 ## Features
 - **Login**, **Sign Up** and **Sign Out**
@@ -15,7 +17,7 @@ https://rationghar-112.web.app/
 - **Assigned Forms:** A personalized list, different for each NGO, that shows all the forms that have been assigned to the logged in NGO.
 - **Form Submission View:** A simple form that shows the data that was entered by the user.
 
-## Instructions
+## Instructions to run on Local Machine
 1. Clone the repo
 2. run the following command to install npm, after navigating into the cloned folder
 ```
