@@ -5,7 +5,7 @@ RationGhar is a food distribution platform to connect NGO's and community servic
 Project made for AtlasHacks Hackathon organized by DevPost. The project can be found on [Devpost](https://devpost.com/software/rationghar).
 
 ## Deployed Link
-https://rationghar.herokuapp.com/
+https://ration-ghar.herokuapp.com/
 
 ## Features
 - **Login**, **Sign Up** and **Sign Out**
