@@ -8,7 +8,7 @@ Project made for AtlasHacks Hackathon organized by DevPost. The project can be f
 https://ration-ghar.herokuapp.com/
 
 ## Features
-- **Login**, **Sign Up** and **Sign Out**
+- **Login**, **Sign Up** and **Sign Out**, **Change Password**
 - **Public Homepage:** The page displays the total number of NGO's registed and the total number of rations(food packages) delivered by all NGO's. In addition, there are tabs to navigate the users to a Registration Form and a list, of all the active requests. 
 - **Registration Form:** Form to recieve the general information from a person who wishes to get a ration delived to themselves from one of the registered NGO's.
 - **Active Forms (submitted by people):** A list of the Active Forms
